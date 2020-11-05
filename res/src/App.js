@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import './App.css';
-import TopBar from './AppComponent/TopBar';
-import BodyLeft from './AppComponent/BodyLeft.js/BodyLeft';
-import MainBody from './AppComponent/MainBody/MainBody';
+import TopNavBar from './AppComponent/TopNavBar';
+import LeftBody from './AppComponent/LeftBody'
+import {BrowserRouter as Router, Switch ,Route} from 'react-router-dom'
+import  MainBody from './AppComponent/MainBody';
 
 export class App extends Component {
   render() {
     return (
+      <Router>
       <div className='App'>
-        <div className='PaddingBody'/>
-        <BodyLeft />
-        <TopBar/>
+        <LeftBody/>
+        <TopNavBar/>
         <MainBody/>
-        
       </div>
+      </Router>
     )
   }
 }

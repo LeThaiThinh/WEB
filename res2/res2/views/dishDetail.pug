@@ -1,0 +1,11 @@
+extends layout
+include mixins/dish
+block content
+    each dish in dishData
+        .dish
+            if url.startsWith('/admin')
+                a(href=`${dish._id}/update`)
+                    button(class="button_small") Update Dish
+                a(href=`${dish._id}/delete`)
+                    button(class="button_small") Delete Dish
+            +dish(dish)

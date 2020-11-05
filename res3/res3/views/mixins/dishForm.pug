@@ -1,0 +1,24 @@
+mixin dishForm
+    form(action="", method="post")
+        .formInput
+            label(for="name") Dish name : 
+            input(type="text", name="name" required)
+        .formInput
+            label(for="description") Description :
+            input(type="text", name="description" required)
+        .formInput
+            label(for="available") available :
+            input(type="radio", name="available" value="true" checked) 
+            label(for="available") unavailable :
+            input(type="radio", name="available" value="false" )    
+        .formInput
+            label(for="cost") cost :
+            input(type="number", name="cost" required)
+        .formInput
+            label(for="rating") rating :
+            input(type="number", name="rating" min="1" max="5" required)
+        .formInput
+            label(for="image") image :
+            input(type="file", name="image" required)
+        .formInput
+            button(type="submit") Confirm

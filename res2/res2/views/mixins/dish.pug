@@ -1,0 +1,15 @@
+mixin dish(dish)
+    .dish
+        .dish_img
+            a(href=`/menu/${dish._id}`)
+                img(src=`/images/dishes/${dish.image}`, alt=`/images/dishes/${dish.image}`)
+        .dish_info
+            a(href=`/menu/${dish._id}`)
+                h3=dish.nameDish
+            hr
+            if url.startsWith('/menu/')
+                p=`Description:${dish.description}`
+            p=`Name:${dish.name}`
+            p=`Country:${dish.country}`
+            p=`Cost:${dish.cost}`
+            p=`Star rating:${dish.starRating}`

@@ -1,0 +1,15 @@
+extends layout
+include mixins/footer
+include mixins/dishForm
+include mixins/dish
+
+block content
+  .topbar
+    block topbar
+  .body
+    block body
+      .sidebody
+        block sidebody
+      .mainbody  
+        block mainbody
+  +footer
