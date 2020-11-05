@@ -1,9 +1,10 @@
 {
-  "name": "lets-travel",
+  "name": "res",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "devstart" :"nodemon ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -14,5 +15,8 @@
     "mysql2": "^2.2.5",
     "pug": "2.0.0-beta11",
     "sequelize": "^6.3.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
   }
 }

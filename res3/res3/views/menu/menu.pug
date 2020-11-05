@@ -1,0 +1,8 @@
+extend ../index
+include ../mixins/dish
+block append topbar
+    +topbar
+block append mainbody
+    .menu
+        each dish in dishes
+            +dish(dish)

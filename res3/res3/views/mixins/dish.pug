@@ -1,7 +1,8 @@
 mixin dish(dish)
     .dish
         .dishImage
-            img(src=`/images/dishes/${dish.image}`, alt=`/images/dishes/${dish.image}`)
+            a(href=`/menu/${dish.id}`)
+                img(src=`/images/dishes/${dish.image}`, alt=`/images/dishes/${dish.image}`)
         .dishInfo
             h3=dish.name
             p=dish.description
