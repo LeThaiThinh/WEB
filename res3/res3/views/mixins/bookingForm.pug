@@ -1,0 +1,18 @@
+include table
+mixin bookingForm
+    form(action="", method="post")
+        .formInput
+            label(for="name") Dish name : 
+            input(type="text", name="name" required)
+        .formInput
+            label(for="phone") Phone :
+            input(type="text", name="phone" required)            
+        .formInput
+            label(for="date") Cost :
+            input(type="date", name="date" required)
+        .formInput
+            label(for="amountOfPeople") Amount of people :
+            input(type="file", name="amountOfPeople" required)
+        +tables
+        .formInput
+            button(type="submit") Confirm
