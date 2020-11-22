@@ -1,4 +1,13 @@
 mixin topbarAdmin
-    a(href="/admin") home
-    a(href="/admin/menu") menu
-    a(href="/") logout
+    .header
+        .logo
+            h1 Team 13.
+            .line
+        .topbar
+            ul.topbar-content
+                li
+                    a(href="/admin" class="topbar-text") home
+                li
+                    a(href="/admin/menu" class="topbar-text") menu
+                li
+                    a(href="/" class="topbar-text") logout

@@ -6,13 +6,36 @@ const sequelize = new Sequelize(pathSql, {
       timestamps: false
   }
 });
-const Dish=sequelize.define('dish',{
-    name:Sequelize.STRING,
-    description:Sequelize.STRING,
-    available:Sequelize.BOOLEAN,
-    rating:Sequelize.INTEGER,
-    cost:Sequelize.INTEGER,
-    image:Sequelize.STRING,
+const Dish=sequelize.define('dishes',{
+    id:{
+        type:Sequelize.INTEGER,
+        primaryKey:true,
+        autoIncrement:true,
+    },
+    nameDish:{
+        type:Sequelize.STRING,
+        allowNull:false,
+    },
+    description:{
+        type:Sequelize.STRING,
+        allowNull:false,
+    },   
+    cost:{
+        type:Sequelize.INTEGER,
+        allowNull:false,
+    },
+    rating:{
+        type:Sequelize.INTEGER,
+        allowNull:false,
+    },
+    image:{
+        type:Sequelize.STRING,
+        allowNull:false,
+    },
+    available:{
+        type:Sequelize.BOOLEAN,
+        allowNull:false,
+    },
 })
 Dish.sync().then(() => {
     console.log('New table created');

@@ -1,5 +1,10 @@
-extend ../index
+extends ../index
 include ../mixins/topbarAdmin
+include ../mixins/bookingFormAdmin
 block append topbar
     +topbarAdmin
-block append body
+block append sidebody
+    a(href="booking/editTable") Edit Table
+    +tableFormAdmin(tables)
+block append mainbody
+    

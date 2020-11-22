@@ -1,24 +1,22 @@
 mixin dishForm
-    form(action="", method="post")
-        .formInput
-            label(for="name") Dish name : 
-            input(type="text", name="name" required)
-        .formInput
-            label(for="description") Description :
-            input(type="text", name="description" required)
-        .formInput
-            label(for="available") available :
-            input(type="radio", name="available" value="true" checked) 
-            label(for="available") unavailable :
-            input(type="radio", name="available" value="false" )    
-        .formInput
-            label(for="cost") cost :
-            input(type="number", name="cost" required)
-        .formInput
-            label(for="rating") rating :
-            input(type="number", name="rating" min="1" max="5" required)
-        .formInput
-            label(for="image") image :
-            input(type="file", name="image" required)
-        .formInput
-            button(type="submit") Confirm
+    .dish-form
+        form(action="", method="post" class="dish-form-1")
+            .formInput
+                input(type="text", name="nameDish" required class="text-box" placeholder="Dish name")
+            .formInput
+                input(type="text", name="description" required class="text-box" placeholder="Description")
+            .formInput
+                input(type="number", name="cost" required class="text-box" placeholder="Cost")
+            .formInput
+                input(type="number", name="rating" min="1" max="5" required class="text-box" placeholder="Rating")
+            .formInput
+                input(type="file", name="image" required style="margin-bottom: 10px;" placeholder="Choose image" class="text-box")
+            .formInput
+                .availability
+                    label(for="available" ) available&ensp;
+                    input(type="radio", name="available" value="true" checked )
+                .availability 
+                    label(for="available" ) unavailable&ensp;
+                    input(type="radio", name="available" value="false")        
+            .formInput
+                button(type="submit" class="form-button" ) Confirm

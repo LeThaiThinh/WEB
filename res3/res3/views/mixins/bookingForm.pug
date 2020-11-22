@@ -1,8 +1,8 @@
 include table
-mixin bookingForm
+mixin bookingForm(tables)
     form(action="", method="post")
         .formInput
-            label(for="name") Dish name : 
+            label(for="name") name : 
             input(type="text", name="name" required)
         .formInput
             label(for="phone") Phone :
@@ -12,7 +12,9 @@ mixin bookingForm
             input(type="date", name="date" required)
         .formInput
             label(for="amountOfPeople") Amount of people :
-            input(type="file", name="amountOfPeople" required)
-        +tables
+            input(type="number", name="amountOfPeople" required)
+        .tables
+            each table in tables
+                +table(table)
         .formInput
             button(type="submit") Confirm

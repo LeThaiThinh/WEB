@@ -1,7 +1,5 @@
-mixin tablesAdmin
-    .formInput
-            label(for="picked") available :
-            input(type="radio", name="picked" ) 
-    .formInput
-            label(for="picked") unavailable :
-            input(type="radio", name="picked" )
+mixin tablesAdmin(table)
+        button(type="button" className="buttonTable" ) 
+                .formInputTick
+                        label(for="occuppied")=`table:${table.numberTable}`
+                        input(type="checkbox", name="occuppied" )

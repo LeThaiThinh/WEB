@@ -3,25 +3,36 @@ const pathSql = 'mysql://root:Root@localhost:3306/new_schema';
 const sequelize = new Sequelize(pathSql, { 
   logging: false,
   define: {
-      timestamps: false
+      timestamps: true
   }
 });
-const BookingTable=sequelize.define('bookingTable',{
-    //customer:{
-    name:Sequelize.STRING,
-    dateOfBirth:Sequelize.DATEONLY,
-    phone:Sequelize.STRING,
-    //},
-    date:Sequelize.DATE,
-    amountOfPeople:Sequelize.INTEGER,
-    //table:{
-        number:Sequelize.INTEGER,
-        occupied:Sequelize.BOOLEAN,
-    //},
-    callBack:Sequelize.BOOLEAN,
+const BookingTable=sequelize.define('bookingTables',{
+    idBooking:{
+        type:Sequelize.INTEGER,
+        primaryKey:true,
+        autoIncrement:true,
+    },
+    idCustomer:{
+        type:Sequelize.STRING,
+        allowNull:false,
+    },
+    date:{
+        type:Sequelize.TIME,
+        allowNull:false,
+    },
+    amountOfPeople:{
+        type:Sequelize.INTEGER,
+        allowNull:false,
+    },
+    numberTable:{
+        type:Sequelize.INTEGER,
+    },
+    callBack:{
+        type:Sequelize.BOOLEAN,
+    },
 
 })
-BookingTable.sync().then(()=>{
+BookingTable.sync({force:true}).then(()=>{
     console.log('New table created');
 })
 module.exports=BookingTable;

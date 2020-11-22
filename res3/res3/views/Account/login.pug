@@ -1,7 +1,12 @@
-form(action="", method="post")
+extends ../index
+block content
+    h2=title
+    h2=message
+    hr
+    form(action="", method="POST")
         .formInput
-            label(for="name") Username : 
-            input(type="text", name="name" required)
+            label(for="username") Username : 
+            input(type="text", name="username" required)
         .formInput
             label(for="password") Password :
             input(type="password", name="password" required)

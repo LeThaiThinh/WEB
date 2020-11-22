@@ -1,0 +1,5 @@
+mixin table(table)
+    button(type="button" className="buttonTable" ) 
+        .formInputTick
+            label(for="picked")=`table:${table.numberTable}`
+            input(type="radio", name="picked" ) 

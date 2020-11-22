@@ -1,0 +1,13 @@
+extends ../index
+include ../mixins/tableAdmin
+include ../mixins/topbarAdmin
+include ../mixins/bookingFormAdmin
+block append topbar
+    +topbarAdmin
+block append sidebody
+    +tableFormAdmin(tables)
+block append mainbody
+    .tables
+    form(action="booking/table/editTable/edit", method="post",redirect="booking/table/editTable")
+            each table in tables
+                +tablesAdmin(table)

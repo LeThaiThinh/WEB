@@ -1,0 +1,10 @@
+mixin dishDetail(dish)
+    .dishDetail
+        .dishDetailImage
+            a(href=`/menu/${dish.id}`)
+                img(src=`/images/dishes/${dish.image}`, alt=`/images/dishes/${dish.image}` class="dishDetail-img")
+        .dishDetailInfo
+            h4(class="dish-name")=dish.name
+            //- p=dish.description
+            p(class="dish-cost")=`${dish.cost}`
+            //- p=dish.rating

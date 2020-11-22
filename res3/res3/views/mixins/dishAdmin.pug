@@ -1,15 +1,15 @@
 mixin dishAdmin(dish)
     .dish
-        a(href=`/admin/menu/${dish.id}/edit`) 
-            button(type="submit") Edit 
-        a(href=`/admin/menu/${dish.id}/remove`) 
-            form(action=`/admin/menu/${dish.id}/remove`, method="post")
-                button(type="submit") Remove
         .dishImage
             a(href=`/admin/menu/${dish.id}`)
-                img(src=`/images/dishes/${dish.image}`, alt=`/images/dishes/${dish.image}`)
-        .dishInfo
-            h3=dish.name
-            p=dish.description
-            p=dish.cost
-            p=dish.rating
+                img(src=`/images/dishes/${dish.image}`, alt=`/images/dishes/${dish.image}` class="dish-img")
+                a(href=`/admin/menu/${dish.id}/edit` ) 
+                    button(type="submit" class="edit-button") Edit 
+                a(href=`/admin/menu/${dish.id}/remove`  ) 
+                    form(action=`/admin/menu/${dish.id}/remove`, method="post")
+                        button(type="submit" class="remove-button") Remove        
+        //- .dishInfo
+        //-     h3=dish.name
+        //-     p=dish.description
+        //-     p=dish.cost
+        //-     p=dish.rating

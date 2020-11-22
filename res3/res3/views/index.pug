@@ -3,13 +3,14 @@ include mixins/footer
 include mixins/dishForm
 include mixins/topbar
 include mixins/topbarAdmin
-block content
-  .topbar
-    block topbar
+block wrap
+  block topbar
   .body
     block body
-      .sidebody
-        block sidebody
-      .mainbody  
-        block mainbody
-  +footer
+      .sidebar
+        block sidebar
+        .sidebar-text
+          block sidebar-text
+        .content
+          block content
+      +footer

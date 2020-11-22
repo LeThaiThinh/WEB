@@ -1,11 +1,14 @@
-extend ../index
+extends ../index
 include ../mixins/dishAdmin
 block append topbar
     +topbarAdmin
-block append sidebody
-    +dishForm
-block append mainbody
-    p body menu Admin1
-    .menu
-        each dish in dishes
-            +dishAdmin(dish)
+block append content
+    .wrap-content
+        .menu
+            each dish in dishes
+                 +dishAdmin(dish)  
+block append sidebar-text
+    .menu-admin
+        a Add Dish
+        +dishForm
+     
