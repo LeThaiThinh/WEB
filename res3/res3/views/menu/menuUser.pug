@@ -1,0 +1,15 @@
+extends ../index
+include ../mixins/dish
+block append topbar
+    +topbarUser
+block append sidebar-text
+    .edit-text
+        p THIS IS OUR MENU!
+        br
+        p
+        | I&apos;m a paragraph. Click here to add your own text and edit me. It&rsquo;s easy. Just click &ldquo;Edit Text&rdquo; or double click me to add your own content and make changes to the font.
+block append content
+    .wrap-content
+        .menu
+            each dish in dishes
+                +dish(dish)

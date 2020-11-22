@@ -31,14 +31,14 @@ router.post('/menu',async function(req,res,next){
            next(error)
     }
 });
-router.get('/menu/:dishId',async function(req,res,next){
-    const dishId=req.params.dishId;
-    const dish=await Dish.findOne({where:{dishId:dishId}});
+router.get('/menu/:id',async function(req,res,next){
+    const id=req.params.id;
+    const dish=await Dish.findOne({where:{id:id}});
     res.render('menu/dishDetailAdmin',  {title: 'menu',dish});
 });
-router.post('/menu/:dishId/remove',async function(req,res,next){
-    const dishId=req.params.dishId;
-    await Dish.destroy({where:{dishId:dishId}})
+router.post('/menu/:id/remove',async function(req,res,next){
+    const id=req.params.id;
+    await Dish.destroy({where:{id:id}})
     res.redirect('/admin/menu')
 });
 router.get('/menu/:id/edit',async function(req,res,next){
@@ -48,9 +48,9 @@ router.get('/menu/:id/edit',async function(req,res,next){
 router.post('/menu/:id/edit',async function(req,res,next){
     try{
         const dish=req.body;
-        const dishId=req.params.id;
+        const id=req.params.id;
         await Dish.update(dish,
-          {where:{dishId:dishId}}
+          {where:{id:id}}
           )
         res.redirect('/admin/menu');
     }catch(error){

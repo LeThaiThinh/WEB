@@ -10,23 +10,30 @@ const {santitize, sanitize}=require('express-validator/filter');
 /* Guest */
 router.get('/', function(req, res, next) {
   if(req.session.login){
-    res.redirect(`/user/${req.session.login}`)
-  }
+    res.redirect(`/${req.session.login}/user`
+    )}
   res.render('home/home', { title: 'home' });
 });
 // menu
 router.get('/menu',async function(req,res,next){
-    const dishes= await Dish.findAll({raw:true})
-    res.render('menu/menu',  {title: 'menu', dishes});
+  if(req.session.login){
+    res.redirect(`/${req.session.login}/user/menu`)
+  }
+  const dishes= await Dish.findAll({raw:true })
+  res.render('menu/menu',  {title: 'menuUser', dishes});
 });
 router.get('/menu/:id',async function(req,res,next){
-  const dishId=req.params.id;
-  const dish=await Dish.findOne({where:{dishId:dishId}});
+  const id=req.params.id;
+  const dish=await Dish.findOne({where:{id:id}});
+  if(req.session.login){res.redirect(`/${req.session.login}/user/menu/${id}`)}
   res.render('menu/dishDetail',  {title: 'menu',dish});
 });
 //booking
 router.get('/booking',async function(req,res,next){
   const tables= await Table.findAll({raw:true})
+  if(req.session.login){
+    res.redirect(`/${req.session.login}/user/booking`)
+  }
   res.render('booking/booking', {title:'booking',tables})
 })
 //signup
@@ -64,7 +71,6 @@ router.post('/signup',
 router.get('/login',function(req,res,next){
   res.render('account/login',{title:'Login to continue'});
 })
-
 router.post('/login',async (req,res,next)=>{
   username=req.body.username;
   password=req.body.password;
@@ -72,11 +78,16 @@ router.post('/login',async (req,res,next)=>{
   if(!user){
     res.render('account/login', {title:'wrong username'})
   }else if(user.password!=password){
-    res.render('/signup', {title:'wrong password'})
+    res.render('account/login', {title:'wrong password'})
   }else {
     req.session.login=username;
-    res.redirect(`/user/${username}`);
+    console.log(req.session.login);
+    res.redirect(`/${username}/user`);
   }
 });
-
+//logout
+router.get('/logout', function(req, res, next) {
+  req.session.destroy();
+  res.redirect('/');
+});
 module.exports = router;

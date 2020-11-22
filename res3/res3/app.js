@@ -13,10 +13,11 @@ const FileStore = require('session-file-store')(session);
 app.use(session({
   secret: "bi mat",
   store: new FileStore({}),
+  resave: true,
   saveUninitialized: true,
   cookie: {
-    maxAge: 60000
-  }
+    maxAge: 600000
+  },
 }));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -29,8 +30,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/', indexRouter);
-app.use('/user/:username', userRouter);
-app.use('/admin', adminRouter);
+app.use('/:username/user/', userRouter);
+app.use('/admin/', adminRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
