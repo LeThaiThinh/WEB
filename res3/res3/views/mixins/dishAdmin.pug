@@ -8,8 +8,3 @@ mixin dishAdmin(dish)
                 a(href=`/admin/menu/${dish.id}/remove`  ) 
                     form(action=`/admin/menu/${dish.id}/remove`, method="post")
                         button(type="submit" class="remove-button") Remove        
-        //- .dishInfo
-        //-     h3=dish.name
-        //-     p=dish.description
-        //-     p=dish.cost
-        //-     p=dish.rating
