@@ -1,4 +1,5 @@
 var express = require('express');
+const Sequelize = require('sequelize');
 var router = express.Router();
 const Dish=require("../model/dish")
 const reserveTable=require("../model/reserveTable");
@@ -53,7 +54,7 @@ router.post('/search',async function(req,res,next){
     order: [['rating', ratingOrder]],
     where:{
       cost:{ 
-        $between : [1, costLimit] 
+        $between: [1, 100] 
       } ,
       //available:availability ,
     }
