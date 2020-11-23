@@ -11,6 +11,7 @@ function Redirect(req,res,params){
     res.redirect(`/${req.session.login}/user${params}`)
   }
 }
+var login;
 /* Guest */
 router.get('/', function(req, res, next) {
   console.log(req.session.login)
@@ -80,12 +81,14 @@ router.post('/login',async (req,res,next)=>{
     res.render('account/login', {title:'wrong password'})
   }else {
     req.session.login=username;
+    login=username;
     Redirect(req,res,'')
   }
 });
 //logout
 router.get('/logout', function(req, res, next) {
-  delete req.session.login;
+  //delete req.session.login;
+  req.session.destroy();
   res.redirect('/');
 });
 module.exports = router;

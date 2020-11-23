@@ -15,7 +15,7 @@ app.use(session({
   secret: "bi mat",
   store: new FileStore({}),
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   cookie: {
     maxAge: 600000,
   },

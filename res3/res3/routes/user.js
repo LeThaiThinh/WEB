@@ -3,7 +3,6 @@ var router = express.Router();
 const Dish=require("../model/dish")
 /* GET userlisting. */
 router.get('/', function(req, res, next) {
-  req.session.value="qwer";
   res.render('home/homeUser', { title: 'homeUser' });
 });
 // menu
