@@ -19,10 +19,10 @@ router.get('/menu/:id',async function(req,res,next){
   const dish=await Dish.findOne({where:{id:id}});
   res.render('menu/dishDetail',  {title: 'menu',dish:dish});
 });
-//booking
-router.get('/booking',async function(req,res,next){
+//reserve
+router.get('/reserve',async function(req,res,next){
   const tables= await Table.findAll({raw:true})
-  res.render('booking/booking', {title:'booking',tables})
+  res.render('reserve/reserve', {title:'reserve',tables})
 })
 
 module.exports = router;

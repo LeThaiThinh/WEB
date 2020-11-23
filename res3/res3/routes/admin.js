@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const Dish=require("../model/dish")
-const BookingTable=require("../model/bookingTable")
+const reserveTable=require("../model/reserveTable")
 const user=require("../model/user")
 const Table=require("../model/table")
 /*ADMIN*/
@@ -57,12 +57,12 @@ router.post('/menu/:id/edit',async function(req,res,next){
            next(error)
     }
 });
-//booking
-router.get('/booking',async function(req,res,next){
+//reserve
+router.get('/reserve',async function(req,res,next){
     const tables= await Table.findAll({raw:true})
-    res.render('booking/bookingAdmin', {title:'booking',tables})
+    res.render('reserve/reserveAdmin', {title:'reserve',tables})
 })
-router.post('/booking/editTable',async function(req,res,next){
+router.post('/reserve/editTable',async function(req,res,next){
     try{
         const tableId=req.body.numberTable;
         tables =await Table.create({
@@ -72,11 +72,11 @@ router.post('/booking/editTable',async function(req,res,next){
     }catch(error){
            next(error)
     }
-    res.render('booking/editTable', {title:'booking',tables})
+    res.render('reserve/editTable', {title:'reserve',tables})
 })
-router.get('/booking/editTable',async function(req,res,next){
+router.get('/reserve/editTable',async function(req,res,next){
     const tables= await Table.findAll({raw:true})
-    res.render('booking/editTable', {title:'booking',tables})
+    res.render('reserve/editTable', {title:'reserve',tables})
 })
 module.exports = router;
 

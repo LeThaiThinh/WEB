@@ -1,0 +1,10 @@
+extends ../index
+include ../mixins/topbarAdmin
+include ../mixins/reserveFormAdmin
+block append topbar
+    +topbarAdmin
+block append sidebody
+    a(href="reserve/editTable") Edit Table
+    +tableFormAdmin(tables)
+block append mainbody
+    

@@ -1,0 +1,24 @@
+mixin searchForm
+    .dish-form
+        form(action="search", method="post" class="dish-form-1")
+            .formInput
+                input(type="text", name="nameDish" class="text-box" placeholder="Dish name")
+            .formInput
+                select(name="costOrder")
+                    option(value="increase") increase
+                    option(value="decrease") decrease
+            .formInput
+                input(type="number", name="costLimit" min="1" max="500" class="text-box" placeholder="cost")
+            .formInput
+                select(name="ratingOrder")
+                    option(value="increase") increase
+                    option(value="decrease") decrease
+            .formInput
+                .availability
+                    label(for="available" ) available&ensp;
+                    input(type="radio", name="available" value="true" )
+                .availability
+                    label(for="available" ) unavailable&ensp;
+                    input(type="radio", name="available" value="false")        
+            .formInput
+                button(type="submit" class="form-button" ) Confirm
