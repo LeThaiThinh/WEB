@@ -1,0 +1,8 @@
+mixin dishUser(dish)
+    .dish
+        .dishImage
+            a(href=`menu/${dish.id}`)
+                img(src=`/images/dishes/${dish.image}`, alt=`/images/dishes/${dish.image}` class="dish-img")
+        .dishInfo
+            h4(class="dish-name")=dish.name
+            p(class="dish-cost")=`${dish.cost}`

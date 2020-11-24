@@ -1,18 +1,20 @@
 mixin searchForm
     .dish-form
-        form(action="search", method="post" class="dish-form-1")
+        form(action="search", method="post" class="dish-form-1" autocomplete)
             .formInput
                 input(type="text", name="nameDish" class="text-box" placeholder="Dish name")
             .formInput
-                select(name="costOrder")
-                    option(value="increase") increase
-                    option(value="decrease") decrease
+                input(type="number", name="costMax" min="1" class="text-box" placeholder="costMax")
             .formInput
-                input(type="number", name="costLimit" min="1" max="500" class="text-box" placeholder="cost")
+                input(type="number", name="costMin" min="1" class="text-box" placeholder="costMin")
             .formInput
-                select(name="ratingOrder")
-                    option(value="increase") increase
-                    option(value="decrease") decrease
+                select(name="order" value=null)
+                    optgroup(label="order by cost")
+                        option(value="increaseCost") increase cost
+                        option(value="decreaseCost") decrease cost
+                    optgroup(label="order by rating")    
+                        option(value="increaseRating") increase rating
+                        option(value="decreaseRating") decrease rating
             .formInput
                 .availability
                     label(for="available" ) available&ensp;

@@ -6,7 +6,7 @@ const sequelize = new Sequelize(pathSql, {
       timestamps: true
   }
 });
-const reserveTable=sequelize.define('reserveTables',{
+const ReserveTable=sequelize.define('reserveTables',{
     idreserve:{
         type:Sequelize.INTEGER,
         primaryKey:true,
@@ -32,7 +32,7 @@ const reserveTable=sequelize.define('reserveTables',{
     },
 
 })
-reserveTable.sync({force:true}).then(()=>{
+ReserveTable.sync({force:true}).then(()=>{
     console.log('New table created');
 })
-module.exports=reserveTable;
+module.exports=ReserveTable;
