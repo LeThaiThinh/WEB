@@ -9,8 +9,14 @@ mixin dishForm
                 input(type="number", name="cost" required class="text-box" placeholder="Cost")
             .formInput
                 input(type="number", name="rating" min="1" max="5" required class="text-box" placeholder="Rating")
-            .formInput
-                input(type="file", name="image" required style="margin-bottom: 10px;" placeholder="Choose image" class="text-box")
+            //- .formInput
+            //-     input(type="file", name="image" required style="margin-bottom: 10px;" placeholder="Choose image" class="text-box")
+            .file-upload
+                .file-select
+                    #fileName.file-select-button Choose File
+                    #noFile.file-select-name No file chosen...
+                    input#chooseFile(type="file", name="image" required style="margin-bottom: 10px;")
+
             .formInput
                 .availability
                     label(for="available" ) available&ensp;

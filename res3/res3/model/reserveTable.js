@@ -3,41 +3,36 @@ const pathSql = 'mysql://root:Cunmiu123@localhost:3306/new_schema';
 const sequelize = new Sequelize(pathSql, { 
   logging: false,
   define: {
-      timestamps: false
+      timestamps: true
   }
 });
-const Dish=sequelize.define('dishes',{
-    id:{
+const reserveTable=sequelize.define('reserveTables',{
+    idreserve:{
         type:Sequelize.INTEGER,
         primaryKey:true,
         autoIncrement:true,
     },
-    nameDish:{
+    idCustomer:{
         type:Sequelize.STRING,
         allowNull:false,
     },
-    description:{
-        type:Sequelize.STRING,
+    date:{
+        type:Sequelize.TIME,
         allowNull:false,
-    },   
-    cost:{
+    },
+    amountOfPeople:{
         type:Sequelize.INTEGER,
         allowNull:false,
     },
-    rating:{
+    numberTable:{
         type:Sequelize.INTEGER,
-        allowNull:false,
     },
-    image:{
-        type:Sequelize.STRING,
-        allowNull:false,
-    },
-    available:{
+    callBack:{
         type:Sequelize.BOOLEAN,
-        allowNull:false,
     },
+
 })
-Dish.sync({force:true}).then(() => {
+reserveTable.sync({force:true}).then(()=>{
     console.log('New table created');
 })
-module.exports=Dish;
+module.exports=reserveTable;
