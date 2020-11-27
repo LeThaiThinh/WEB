@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const pathSql = 'mysql://root:Root@localhost:3306/new_schema';
+const pathSql = 'mysql://root:Cunmiu123@localhost:3306/new_schema';
 const passportLocalSequelize = require('passport-local-sequelize');
 const sequelize = new Sequelize(pathSql, { 
   logging: false,

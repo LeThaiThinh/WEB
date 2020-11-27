@@ -3,7 +3,7 @@ mixin dishDetail(dish)
         .dishDetailImage
             a(href=`/menu/${dish.id}`)
                 img(src=`/images/dishes/${dish.image}`, alt=`/images/dishes/${dish.image}` class="dishDetail-img")
-        .dishDetailInfo
-            h4(class="dish-name")=dish.name
+        .explicit-dishInfo
+            h2(class="dish-name")=dish.nameDish
             p(class="dish-cost")=`${dish.cost}`
-            h4.
+            
