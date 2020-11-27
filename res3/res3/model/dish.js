@@ -37,7 +37,5 @@ const Dish=sequelize.define('dishes',{
         allowNull:false,
     },
 })
-Dish.sync().then(() => {
-    console.log('New table created');
-})
+
 module.exports=Dish;

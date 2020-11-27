@@ -24,10 +24,6 @@ const User=sequelize.define('users',{
         required: 'password is requied',
     }    
 })
-User.sync(
-    //{ force:true}
-    ).then(() => {
-    console.log('New table created');
-});
+
 
 module.exports=User

@@ -1,12 +1,9 @@
 var express = require('express');
 const Op = require('sequelize').Op;
 var router = express.Router();
-const Dish=require("../model/dish")
-const ReserveTable=require("../model/reserveTable");
-const Table = require('../model/table');
-const User = require('../model/user');
-const {check,validationResult}=require('express-validator/check')
-const {santitize, sanitize}=require('express-validator/filter');
+const {Dish,Reservation,User}=require("../model/relation")
+const {check,validationResult}=require("express-validator")
+const {santitize, sanitize}=require("express-validator")
 function Redirect(req,res,params){
   if(req.session.login){
     res.redirect(`/${req.session.login}/user${params}`)
@@ -91,12 +88,6 @@ router.get('/menu/:id',async function(req,res,next){
   Redirect(req,res,`/menu/${id}`)
   res.render('menu/dishDetail',  {title: 'menu',dish});
 });
-//reserve
-router.get('/reserve',async function(req,res,next){
-  const tables= await Table.findAll({raw:true})
-  Redirect(req,res,'/reserve')
-  res.render('reserve/reserve', {title:'reserve',tables})
-})
 //signup
 router.get('/signup',function(req,res,next){
   res.render('account/signup', { title: 'signup' });
@@ -152,4 +143,7 @@ router.get('/logout', function(req, res, next) {
   req.session.destroy();
   res.redirect('/');
 });
+router.get('/reserve',async function(req,res,next){
+  Redirect(req,res,'/reserve')
+})
 module.exports = router;

@@ -1,0 +1,10 @@
+extends ../index
+include ../mixins/reserveFormUser
+block append topbar
+    +topbarUser
+block append content
+    if pendingReservation.length!=0
+        p=`${pendingReservation[0].state}`
+    else  
+        +reserveFormUser
+        

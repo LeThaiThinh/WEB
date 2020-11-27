@@ -1,0 +1,7 @@
+mixin reserveFormUser
+    form(action="", method="post")
+        .formInput
+            label(for="partySize") Size Of Party :
+            input(type="number", name="partySize" required)
+        .formInput
+            button(type="submit") Confirm

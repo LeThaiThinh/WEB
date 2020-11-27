@@ -1,10 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const Op = require('sequelize').Op;
-const Dish=require("../model/dish")
-const ReserveTable=require("../model/reserveTable")
-const User=require("../model/user")
-const Table=require("../model/table")
+const {Dish,Reservation,User}=require("../model/relation")
 /*ADMIN*/
 // home
 router.get('/',function(req,res,next){
@@ -95,7 +92,7 @@ router.post('/search',async function(req,res,next){
 router.get('/menu/:id',async function(req,res,next){
     const id=req.params.id;
     const dish=await Dish.findOne({where:{id:id}});
-    res.render('menu/dishDetailAdmin',  {title: 'menu',dish});
+    res.render('menu/dishDetailAdmin',  {title: 'dishDetailAdmin',dish});
 });
 router.post('/menu/:id/remove',async function(req,res,next){
     const id=req.params.id;
@@ -120,8 +117,7 @@ router.post('/menu/:id/edit',async function(req,res,next){
 });
 //reserve
 router.get('/reserve',async function(req,res,next){
-    const tables= await Table.findAll({raw:true})
-    res.render('reserve/reserveAdmin', {title:'reserve',tables})
+    res.render('reserve/reserveAdmin', {title:'reserve'})
 })
 router.post('/reserve/editTable',async function(req,res,next){
     try{
@@ -141,13 +137,50 @@ router.get('/reserve/editTable',async function(req,res,next){
 })
 //account
 router.get('/account',async function(req,res,next){
+  try{
     const users=await User.findAll({raw:true})
     res.render('account/accountAdmin',{title:'accountAdmin',users})
+  }catch(error){
+    next(error)
+}
+})
+router.get('/account/:id',async function(req,res,next){
+  try{
+    id=req.params.id;
+    const user=await User.findOne({raw:true, where: { id:id }})
+    res.render('account/accountDetail',{title:'accountDetail',user})
+  }catch(error){
+    next(error)
+  }
 })
 router.post('/:id/username',async function(req,res,next){
   try{
     const id=req.params.id;
     await User.update(username,
+      {where:{id:id}}
+      )
+    res.redirect('/account');
+  }catch(error){
+       next(error)
+  }
+})
+router.post('/:id/dateOfBirth',async function(req,res,next){
+  try{
+    const id=req.params.id;
+    res.json(req)
+    await User.update('dateOfBirth',
+      {where:{id:id}}
+      )
+    res.redirect('/admin/account');
+  }catch(error){
+       next(error)
+  }
+})
+router.post('/:id/phone',async function(req,res,next){
+  try{
+    const id=req.params.id;
+    res.json(req)
+    await User.update('phone',
       {where:{id:id}}
       )
     res.redirect('/admin/account');

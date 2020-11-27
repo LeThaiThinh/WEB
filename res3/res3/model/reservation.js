@@ -6,18 +6,20 @@ const sequelize = new Sequelize(pathSql, {
       timestamps: false
   }
 });
-const Table=sequelize.define('tables',{
-    numberTable:{
+const Reservation=sequelize.define('reservations',{
+    id:{
         type:Sequelize.INTEGER,
         primaryKey:true,
         autoIncrement:true,
     },
-    occuppied:{
-        type:Sequelize.BOOLEAN,
+    state:{
+        type:Sequelize.STRING,
+        allowNull:false,
+    },
+    partySize:{
+        type:Sequelize.INTEGER,
         allowNull:false,
     },
 })
-Table.sync().then(() => {
-    console.log('New table created');
-});
-module.exports=Table
+
+module.exports=Reservation;

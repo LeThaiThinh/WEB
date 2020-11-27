@@ -1,13 +1,14 @@
 var express = require('express');
 var router = express.Router();
 const Op = require('sequelize').Op;
-const Dish=require("../model/dish")
+const {Dish,Reservation,User}=require("../model/relation")
+var app = express();
 /* GET userlisting. */
-router.get('/', function(req, res, next) {
+router.get('/:username/user/', function(req, res, next) {
   res.render('home/homeUser', { title: 'homeUser' });
 });
 // menu
-router.get('/menu',async function(req,res,next){
+router.get('/:username/user/menu',async function(req,res,next){
   try{
     const dishes= await Dish.findAll({raw:true})
     res.render('menu/menuUser',  {title: 'menu', dishes:dishes});
@@ -15,7 +16,7 @@ router.get('/menu',async function(req,res,next){
     next(error)
   }
 });
-router.post('/search',async function(req,res,next){ 
+router.post('/:username/user/search',async function(req,res,next){ 
   var costOrder="";
   var ratingOrder="";
   var costMax=1000;
@@ -75,15 +76,32 @@ router.post('/search',async function(req,res,next){
   }
   res.render('menu/menu',  {title: 'menu', dishes});
 });
-router.get('/menu/:id',async function(req,res,next){
+router.get('/:username/user/menu/:id',async function(req,res,next){
   const id=req.params.id;
   const dish=await Dish.findOne({where:{id:id}});
   res.render('menu/dishDetail',  {title: 'menu',dish:dish});
 });
-//reserve
-router.get('/reserve',async function(req,res,next){
-  const tables= await Table.findAll({raw:true})
-  res.render('reserve/reserve', {title:'reserve',tables})
+//reservation
+router.get('/:username/user/reserve',async function(req,res,next){
+  const username=req.params.username;
+  const user=await User.findOne({where:{username: username}})
+  const pendingReservation=await user.getReservations({where:{state:{[Op.not]:"done"}}})
+  res.render('reserve/reserveUser', {title:'reserve',pendingReservation:pendingReservation})
+})
+router.post('/:username/user/reserve',async function(req,res,next){
+  try{
+    const username=req.params.username;
+    const user=await User.findOne({where:{username: username}})  
+    const reservation=req.body
+    reservation.state="await"
+    reservation.userId=user.id
+    await Reservation.create(reservation)
+  res.redirect('/:username/user/reserve')
+  }catch(err){
+    console.log(err);
+  }
+  
+  //res.render('reserve/reserveUser', {title:'reserve'})
 })
 
 module.exports = router;

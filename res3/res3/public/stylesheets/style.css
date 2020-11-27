@@ -106,7 +106,7 @@ li {
 .sidebar {
   position: relative;
   margin: 0px 0px 0 calc((100% - 1000px) * 0.5);
-  height: 605px;
+  min-height: 700px;
   display: flex;
   flex-direction: row;
 }
@@ -136,7 +136,7 @@ p {
   background-color: rgba(30, 30, 30, 1);
 }
 .content {
-  height: 700px;
+  height: auto;
   width: 600px;
   position: relative;
   margin-left: 80px;

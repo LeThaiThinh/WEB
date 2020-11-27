@@ -1,9 +1,7 @@
 extends ../index
 block append topbar
     +topbarAdmin
-block append content
-  .wrap-content
-    each user in users
+block body
         .dish-form
                 form(action=`${user.id}/username`, method="post")
                   .formInput 
