@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="css.css"/>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+</head>
+<body>
+    <div class="background2">
+        <div class="topbar">
+            <a href="abc.html" class="menu-topbar"><i class="fas fa-home"></i> Trang Chủ</a>
+            <a href="abc.html" class="menu-topbar"><i class="far fa-books"></i> Khóa Học</a>
+            <a href="abc.html" class="menu-topbar" ><i class="far fa-chalkboard-teacher"></i> Giáo Viên</a>
+            <a href="abc.html" class="menu-topbar"><i class="fas fa-hands-helping"></i> Giới Thiệu</a>
+            <a href="abc.html" class="menu-topbar"><i class="fal fa-sign-out"></i> Đăng xuất</a>
+        </div>
+    </div>
+    <div class="userprofile">
+        <h2 class="user--profile-title-group">Information</h2>
+        <form class="init" method="post" novalidate="novalidate" id="frm-info">
+            <div class=row>
+                <div class="row1">
+                    <div id="ImgPreview" class="no-img"></div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-sm-4 col-xs-12">
+                    <div class="form-group">
+                    <label for="FamilyName" class="required" aria-required="true">Họ và tên</label>
+                    </div>
+                    </div>
+                    <div class="col-lg-9 col-sm-8 col-xs-12">
+                    <div class="form-group">
+                    <span id="span-name" class="span-display" style="display: block;"></span>
+                    <input name="FamilyName" type="text" class="form-control is-required" id="FamilyName" autocomplete="family-name" style="display: none;" aria-required="true">
+                    </div>
+                    </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-4 col-xs-12">
+                        <div class="form-group">
+                        <label for="BirthYear">Ngày sinh</label>
+                        </div>
+                        </div>
+                        <div class="col-lg-9 col-sm-8 col-xs-12">
+                        <div class="form-group">
+                        <span id="span-birthday" class="span-display" style="display: block;">9-6-2020</span>
+                        <input name="BirthYear" type="text" readonly="" id="BirthYear" class="form-control hasDatepicker" placeholder="yyyy-mm-dd" style="display: none;">
+                        </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-4 col-xs-12">
+                        <div class="form-group">
+                        <label for="text" class="required" aria-required="true">Số điện thoại</label>
+                        </div>
+                        </div>
+                        <div class="col-lg-9 col-sm-8 col-xs-12">
+                        <div class="form-group">
+                        <span id="span-phone" class="span-display" style="display: block;"></span>
+                        <input name="PhoneNumber" type="text" class="form-control is-required" id="PhoneNumber" placeholder="Số điện thoại" autocomplete="tel-national" style="display: none;">
+                        </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-4 col-xs-12">
+                        <div class="form-group">
+                        <label for="EmailAddress" class="required" aria-required="true">Địa chỉ Email</label>
+                        </div>
+                        </div>
+                        <div class="col-lg-9 col-sm-8 col-xs-12">
+                        <div class="form-group">
+                        <span id="span-email" class="span-display" style="display: block;">duongvantan2kbg@gmail.com</span>
+                        <input name="EmailAddress" type="email" disabled="" class="form-control" id="EmailAddress" placeholder="Địa chỉ Email" autocomplete="email" style="display: none;">
+                        </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-4 col-xs-12">
+                        <div class="form-group">
+                        <label for="CityName">Địa chỉ</label>
+                        </div>
+                        </div>
+                        <div class="col-lg-9 col-sm-8 col-xs-12">
+                        <div class="form-group">
+                        <span id="span-cityName" class="span-display" style="display: block;"></span>
+                        <textarea name="CityName" type="text" class="form-control" id="CityName" placeholder="Tỉnh/Thành phố bạn đang sống" style="display: none;"></textarea>
+                        </div>
+                        </div>
+                    </div>
+            
+                </div>
+        </form>
+    </div>
+</body>
+</html>

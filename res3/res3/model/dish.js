@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const pathSql = 'mysql://root:Root@localhost:3306/new_schema';
+const pathSql = 'mysql://root:Cunmiu123@localhost:3306/new_schema';
 const sequelize = new Sequelize(pathSql, { 
   logging: false,
   define: {
@@ -37,4 +37,8 @@ const Dish=sequelize.define('dishes',{
         allowNull:false,
     },
 })
+
+// Dish.sync({force:true}).then(() => {
+//     console.log('New table created');
+// })
 module.exports=Dish;

@@ -4,5 +4,13 @@ mixin dishUser(dish)
             a(href=`menu/${dish.id}`)
                 img(src=`/images/dishes/${dish.image}`, alt=`/images/dishes/${dish.image}` class="dish-img")
         .dishInfo
-            h4(class="dish-name")=dish.name
+            h4(class="dish-name")=dish.nameDish
             p(class="dish-cost")=`${dish.cost}`
+    //- .dish
+    //-     .dishImage
+    //-         a(href=`menu/${dish.id}`)
+    //-             img(src=`/images/dishes/${dish.image}`, alt=`/images/dishes/${dish.image}` class="dish-img")
+
+    //-     .dishInfo
+    //-         a(class="dish-name",href=`menu/${dish.id}` )=dish.nameDish
+    //-         p(class="dish-cost")=`${dish.cost}`        

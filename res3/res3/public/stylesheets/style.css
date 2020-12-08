@@ -1,6 +1,7 @@
 *{
   font-family:'Lato', sans-serif;
 }
+
 @font-face {
   font-family: devil ;
   font-weight: bold;
@@ -89,7 +90,8 @@ li {
 }
 
 .body{
-  width: 100%;
+  width: 1000px;
+  margin: auto;
   height: 100%;
   min-height: 605px;
   display: flex;
@@ -193,7 +195,7 @@ p {
   height: 25px;
   padding-left: 10px;
   margin-bottom: 10px;
-  margin-top: -5px;
+  margin-top: 5px;
   border: none;
 }
 .form-button {
@@ -231,7 +233,7 @@ p {
 }
 .menu {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 50% 50%;
   column-gap: 0px;
   row-gap: 10px;
   margin: 40px;
@@ -294,7 +296,7 @@ p {
   display: block;
   cursor: pointer;
   height: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
   margin-top: 5px;
   line-height: 31px;
   text-align: left;
@@ -380,21 +382,23 @@ p {
 
 .form input {
   font-size: 16px;
-  padding: 10px 20px 10px 5px ;
+  padding: 0px 20px .0px 5px ;
   border: none;
   outline: none;
   background: none;
+  color: white;
+  cursor: pointer;
 }
-.username ,.password {
+.username ,.password,.Phone,.dateofbirth {
   display: block;
   border-radius: 30px;
   border: 1px solid white;
-  padding: 15px;
+  padding: 7px;
   margin: 10px 0;
 }
 .form svg {
   height: 25px;
-  margin-bottom: 10px;
+  margin-bottom: 2px;
   margin-left: 10px;
   margin-right: 5px;
   fill: white;
@@ -439,5 +443,37 @@ a {
   text-align: center;
   text-transform: capitalize;
 }
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color: rgba(0, 0, 0, 0);
+  opacity: 1;
+  display: block;
+  background: url(../icon/icons8-calendar-24.png) no-repeat;
+  width: 20px;
+  height: 20px;
+  border-width: thin;
+  cursor: pointer;
+}
+.availability> label {
+  line-height: 26px;
+}
+.order {
+  font-size: 14px;
+  color: #ffffff;
+  background-color: #494949;
+  margin-top: -4px;
+  text-transform: capitalize;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+
+/* Responsive */
+@media only screen and (max-width: 600px) {
+  body {
+    background-color: rgb(4, 255, 45);
+  }
+}
+
+
 
 

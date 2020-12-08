@@ -7,20 +7,21 @@ mixin searchForm
                 input(type="number", name="costMax" min="1" class="text-box" placeholder="costMax")
             .formInput
                 input(type="number", name="costMin" min="1" class="text-box" placeholder="costMin")
-            .formInput
-                select(name="order" value=null)
-                    optgroup(label="order by cost")
-                        option(value="increaseCost") increase cost
-                        option(value="decreaseCost") decrease cost
-                    optgroup(label="order by rating")    
-                        option(value="increaseRating") increase rating
-                        option(value="decreaseRating") decrease rating
+            
             .formInput
                 .availability
                     label(for="available" ) available&ensp;
                     input(type="radio", name="available" value="true" )
                 .availability
                     label(for="available" ) unavailable&ensp;
-                    input(type="radio", name="available" value="false")        
+                    input(type="radio", name="available" value="false")   
+            .formInput
+                select(name="order" value=null class="order")
+                    optgroup(label="order by cost")
+                        option(value="increaseCost") increase cost
+                        option(value="decreaseCost") decrease cost
+                    optgroup(label="order by rating")    
+                        option(value="increaseRating") increase rating
+                        option(value="decreaseRating") decrease rating             
             .formInput
                 button(type="submit" class="form-button" ) Confirm

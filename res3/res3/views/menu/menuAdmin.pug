@@ -3,8 +3,10 @@ include ../mixins/dish/dishAdmin
 block append topbar
     +topbarAdmin
 block append sidebar-text
-    +searchForm
+    
     .menu-admin
+        a Search
+        +searchForm
         a Add Dish
         +dishForm
     

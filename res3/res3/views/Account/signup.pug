@@ -1,26 +1,61 @@
 extends ../index
+block append topbar
+    +topbar
 block content
-    p=title
-    hr
-    if errors
-        ul
-            for error in errors
-                li=`${error.msg}`
-    form(action="", method='post')
-        .formInput
-            label(for="username") Username : 
-            input(type="text", name="username" required)
-        .formInput 
-            label(for="phone") Phone :
-            input(type="tel", name="phone" required)
-        .formInput 
-            label(for="dateOfBirth") Date of birth :
-            input(type="date", name="dateOfBirth" required)
-        .formInput
-            label(for="password") Password :
-            input(type="password", name="password" id="password" required)
-        .formInput
-            label(for="confirmPassword") Confirm Password :
-            input(type="password", name="confirmPassword" id="confirmPassword" required)
-        .formInput
-            button(type="submit") Confirm
+    .wrap-content
+        p=title
+        hr
+        if errors
+            ul
+                for error in errors
+                    li=`${error.msg}`
+
+
+        .login-div
+            .title
+                | Sign up
+            
+            form(action="", method="post" class="form")
+                .username
+                    svg.svg-icon(viewbox='0 0 20 20')
+                        path(d='M12.075,10.812c1.358-0.853,2.242-2.507,2.242-4.037c0-2.181-1.795-4.618-4.198-4.618S5.921,4.594,5.921,6.775c0,1.53,0.884,3.185,2.242,4.037c-3.222,0.865-5.6,3.807-5.6,7.298c0,0.23,0.189,0.42,0.42,0.42h14.273c0.23,0,0.42-0.189,0.42-0.42C17.676,14.619,15.297,11.677,12.075,10.812 M6.761,6.775c0-2.162,1.773-3.778,3.358-3.778s3.359,1.616,3.359,3.778c0,2.162-1.774,3.778-3.359,3.778S6.761,8.937,6.761,6.775 M3.415,17.69c0.218-3.51,3.142-6.297,6.704-6.297c3.562,0,6.486,2.787,6.705,6.297H3.415z')
+                    input(type='text' placeholder='Username' name="username" required )
+                .Phone 
+                    svg.svg-icon(viewbox='0 0 20 20')
+                        path(d='M13.372,1.781H6.628c-0.696,0-1.265,0.569-1.265,1.265v13.91c0,0.695,0.569,1.265,1.265,1.265h6.744c0.695,0,1.265-0.569,1.265-1.265V3.045C14.637,2.35,14.067,1.781,13.372,1.781 M13.794,16.955c0,0.228-0.194,0.421-0.422,0.421H6.628c-0.228,0-0.421-0.193-0.421-0.421v-0.843h7.587V16.955z M13.794,15.269H6.207V4.731h7.587V15.269z M13.794,3.888H6.207V3.045c0-0.228,0.194-0.421,0.421-0.421h6.744c0.228,0,0.422,0.194,0.422,0.421V3.888z')
+                    input(type="tel", name="phone" required, placeholder="Phone")
+                .dateofbirth 
+                    svg.svg-icon(viewbox='0 0 20 20')
+                        path(d='M16.557,4.467h-1.64v-0.82c0-0.225-0.183-0.41-0.409-0.41c-0.226,0-0.41,0.185-0.41,0.41v0.82H5.901v-0.82c0-0.225-0.185-0.41-0.41-0.41c-0.226,0-0.41,0.185-0.41,0.41v0.82H3.442c-0.904,0-1.64,0.735-1.64,1.639v9.017c0,0.904,0.736,1.64,1.64,1.64h13.114c0.904,0,1.64-0.735,1.64-1.64V6.106C18.196,5.203,17.461,4.467,16.557,4.467 M17.377,15.123c0,0.453-0.366,0.819-0.82,0.819H3.442c-0.453,0-0.82-0.366-0.82-0.819V8.976h14.754V15.123z M17.377,8.156H2.623V6.106c0-0.453,0.367-0.82,0.82-0.82h1.639v1.23c0,0.225,0.184,0.41,0.41,0.41c0.225,0,0.41-0.185,0.41-0.41v-1.23h8.196v1.23c0,0.225,0.185,0.41,0.41,0.41c0.227,0,0.409-0.185,0.409-0.41v-1.23h1.64c0.454,0,0.82,0.367,0.82,0.82V8.156z')
+                    input(type="date", name="dateOfBirth" required,placeholder="Date of birth")
+                .password
+                    svg.svg-icon(viewbox='0 0 20 20')
+                        path(d='M17.308,7.564h-1.993c0-2.929-2.385-5.314-5.314-5.314S4.686,4.635,4.686,7.564H2.693c-0.244,0-0.443,0.2-0.443,0.443v9.3c0,0.243,0.199,0.442,0.443,0.442h14.615c0.243,0,0.442-0.199,0.442-0.442v-9.3C17.75,7.764,17.551,7.564,17.308,7.564 M10,3.136c2.442,0,4.43,1.986,4.43,4.428H5.571C5.571,5.122,7.558,3.136,10,3.136 M16.865,16.864H3.136V8.45h13.729V16.864z M10,10.664c-0.854,0-1.55,0.696-1.55,1.551c0,0.699,0.467,1.292,1.107,1.485v0.95c0,0.243,0.2,0.442,0.443,0.442s0.443-0.199,0.443-0.442V13.7c0.64-0.193,1.106-0.786,1.106-1.485C11.55,11.36,10.854,10.664,10,10.664 M10,12.878c-0.366,0-0.664-0.298-0.664-0.663c0-0.366,0.298-0.665,0.664-0.665c0.365,0,0.664,0.299,0.664,0.665C10.664,12.58,10.365,12.878,10,12.878')
+                    input(type='password' placeholder='Password' name="password" required)
+                .password
+                    svg.svg-icon(viewbox='0 0 20 20')
+                        path(d='M17.308,7.564h-1.993c0-2.929-2.385-5.314-5.314-5.314S4.686,4.635,4.686,7.564H2.693c-0.244,0-0.443,0.2-0.443,0.443v9.3c0,0.243,0.199,0.442,0.443,0.442h14.615c0.243,0,0.442-0.199,0.442-0.442v-9.3C17.75,7.764,17.551,7.564,17.308,7.564 M10,3.136c2.442,0,4.43,1.986,4.43,4.428H5.571C5.571,5.122,7.558,3.136,10,3.136 M16.865,16.864H3.136V8.45h13.729V16.864z M10,10.664c-0.854,0-1.55,0.696-1.55,1.551c0,0.699,0.467,1.292,1.107,1.485v0.95c0,0.243,0.2,0.442,0.443,0.442s0.443-0.199,0.443-0.442V13.7c0.64-0.193,1.106-0.786,1.106-1.485C11.55,11.36,10.854,10.664,10,10.664 M10,12.878c-0.366,0-0.664-0.298-0.664-0.663c0-0.366,0.298-0.665,0.664-0.665c0.365,0,0.664,0.299,0.664,0.665C10.664,12.58,10.365,12.878,10,12.878')
+                    input(type='password' placeholder='Confirm Password' name="confirmPassword" id="confirmPassword" required)
+                p(class="message")=title
+                p=message
+                button(type="submit" class="signin-btn") Confirm
+                .sign-up
+                    a(href='/login') Already have account ? Log in Here                    
+        //- form(action="", method='post')
+        //-     .formInput
+        //-         label(for="username") Username : 
+        //-         input(type="text", name="username" required)
+        //-     .formInput 
+        //-         label(for="phone") Phone :
+        //-         input(type="tel", name="phone" required)
+        //-     .formInput 
+        //-         label(for="dateOfBirth") Date of birth :
+        //-         input(type="date", name="dateOfBirth" required)
+        //-     .formInput
+        //-         label(for="password") Password :
+        //-         input(type="password", name="password" id="password" required)
+        //-     .formInput
+        //-         label(for="confirmPassword") Confirm Password :
+        //-         input(type="password", name="confirmPassword" id="confirmPassword" required)
+        //-     .formInput
+        //-         button(type="submit") Confirm
