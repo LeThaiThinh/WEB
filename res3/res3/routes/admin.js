@@ -117,23 +117,39 @@ router.post('/menu/:id/edit',async function(req,res,next){
 });
 //reserve
 router.get('/reserve',async function(req,res,next){
-    res.render('reserve/reserveAdmin', {title:'reserve'})
+    const reservations=await Reservation.findAll({include:[User],
+      order:[["id","DESC"]],
+      where:{
+      state:{[Op.not]:"done"}
+      }
+    })
+    const reservationsDone=await Reservation.findAll({include:[User],
+      order:[["id","DESC"]],
+      where:{
+      state:"done"
+      }
+    })
+    // var datetime=reservations[0].datetime.toString();
+    //res.json(reservations[0].user.id)
+    res.render('reserve/reserveAdmin', {title:'reserve', reservations:reservations,reservationsDone:reservationsDone})
 })
-router.post('/reserve/editTable',async function(req,res,next){
-    try{
-        const tableId=req.body.numberTable;
-        tables =await Table.create({
-            numberTable: tableId,
-            occuppied: false
-        })
-    }catch(error){
-           next(error)
-    }
-    res.render('reserve/editTable', {title:'reserve',tables})
+router.post('/reserve/datetime/:id',async function(req,res,next){
+  datetime=req.body.datetime
+  if(datetime!=""){
+    await Reservation.update({datetime:datetime},
+      {where:{userId:req.params.id}}
+    )
+  }
+  res.redirect('/admin/reserve')
 })
-router.get('/reserve/editTable',async function(req,res,next){
-    const tables= await Table.findAll({raw:true})
-    res.render('reserve/editTable', {title:'reserve',tables})
+router.post('/reserve/datetime/:id',async function(req,res,next){
+  datetime=req.body.datetime
+  if(datetime!=""){
+    await Reservation.update({datetime:datetime},
+      {where:{userId:req.params.id}}
+    )
+  }
+  res.redirect('/admin/reserve')
 })
 //account
 router.get('/account',async function(req,res,next){

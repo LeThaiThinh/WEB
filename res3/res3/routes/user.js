@@ -100,8 +100,6 @@ router.post('/:username/user/reserve',async function(req,res,next){
   }catch(err){
     console.log(err);
   }
-  
-  //res.render('reserve/reserveUser', {title:'reserve'})
 })
 
 module.exports = router;

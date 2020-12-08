@@ -12,6 +12,10 @@ const Reservation=sequelize.define('reservations',{
         primaryKey:true,
         autoIncrement:true,
     },
+    datetime:{
+        type:Sequelize.DATE,
+        allowNull:false,
+    },
     state:{
         type:Sequelize.STRING,
         allowNull:false,

@@ -1,6 +1,9 @@
 mixin reserveFormUser
     form(action="", method="post")
         .formInput
+            label(for="datetime") Time :
+            input(type="datetime-local", name="datetime" required)
+        .formInput
             label(for="partySize") Size Of Party :
             input(type="number", name="partySize" required)
         .formInput

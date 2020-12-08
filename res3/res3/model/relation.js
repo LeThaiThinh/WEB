@@ -4,7 +4,7 @@ const Reservation = require("./reservation");
 const User = require("./user");
 
 User.hasMany(Reservation)
-//Reservation.belongsTo(User)
+Reservation.belongsTo(User)
 
 Dish.sync(
     //{force:true}
@@ -18,5 +18,4 @@ User.sync(
     //{ force:true}
     ).then(() => {
 });
-Sequelize.sync
 module.exports={Dish:Dish,Reservation:Reservation,User:User}

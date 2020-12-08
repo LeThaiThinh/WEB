@@ -1,6 +1,27 @@
 extends ../index
-include ../mixins/reserveFormAdmin
+include ../mixins/reserve/reserveFormAdmin
 block append topbar
     +topbarAdmin
 block append content
-    
+  .wrap-content
+    each reservation in reservations
+        .dish-form
+            a(href=`account/${reservation.user.id}`)=reservation.user.username
+        .dish-form
+            form(action=`reserve/datetime/${reservation.user.id}`, method="post")
+                  .formInput
+                    label(for="datetime")=`Attended time at ${reservation.datetime.toString().substring(16,24)} on ${reservation.datetime.toString().substring(8,10)} ${reservation.datetime.toString().substring(3,7)} ${reservation.datetime.toString().substring(11,16) }`
+                    input(type="datetime-local", name="datetime")
+                  .formInput  
+                    label(for="partySize") Party size:
+                    input(type="number", name="partySize" value=`${reservation.partySize}`)
+                  .formInput  
+                    button(type="submit") edit
+        .dish-form
+            form(action=`reserve/datetime/${reservation.user.id}`, method="post")
+                  .formInput  
+                    button(type="submit")=reservation.state
+        .dish-form
+                form(action=`reserve/remove/${reservation.user.id}`, method="post")
+                  .formInput
+                    button(type="submit") remove account
