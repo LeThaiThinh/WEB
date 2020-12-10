@@ -3,29 +3,83 @@ block append topbar
     +topbarAdmin
 block append content
   .wrap-content
-    each user in users
-        .dish-form
-                form(action=`${user.id}/username`, method="post")
-                  .formInput 
-                    a(href=`/admin/account/${user.id}`)    
-                      label(for="username") Username:
-                    input(type="text", name="username" value=`${user.username}`)
-                    button(type="submit") edit
-        .dish-form
-                form(action=`${user.id}/dateOfBirth`, method="post")
-                  .formInput  
-                    a(href=`/admin/account/${user.id}`)    
-                      label(for="birthOfDate") birthOfDate:
-                    input(type="birthOfDate", name="username" value=`${user.birthOfDate}`)
-                    button(type="submit") edit
-        .dish-form        
-                form(action=`${user.id}/phone`, method="post")
-                  .formInput
-                    a(href=`/admin/account/${user.id}`)
-                      label(for="phone") Phone:
-                    input(type="tel", name="phone" value=`${user.phone}`)
-                    button(type="submit") edit
-        .dish-form
-                form(action=`${user.id}/remove`, method="post")
-                  .formInput
-                    button(type="submit") remove account
+    .container-xl
+      .table-responsive
+        .table-wrapper
+          .table-title
+            .row
+              .col-sm-5
+                h2
+                  | Account 
+                  b Management
+              
+          table.table.table-striped.table-hover
+            thead
+              tr
+                th #
+                th Name
+                th Birthday
+                th Phone
+                //- th Status
+                th Action
+            tbody
+              tr
+                td 1
+                  //- a 1
+                td Michael Holz
+                td 04/10/2013
+                td 4234234324
+                //- td  
+                //-   span.status.text-success &bull;
+                //-   |  Active
+                td
+                  a.settings(href='#' title='Settings' data-toggle='tooltip')
+                    i.material-icons &#xE8B8;
+                  a.delete(href='#' title='Delete' data-toggle='tooltip')
+                    i.material-icons &#xE5C9;
+              tr
+                td 2
+                td Paula Wilson
+                td 05/08/2014
+                td 4234234324
+                
+                td
+                  a.settings(href='#' title='Settings' data-toggle='tooltip')
+                    i.material-icons &#xE8B8;
+                  a.delete(href='#' title='Delete' data-toggle='tooltip')
+                    i.material-icons &#xE5C9;
+              tr
+                td 3
+                td Antonio Moreno
+                td 11/05/2015
+                td 4324324234
+                
+                td
+                  a.settings(href='#' title='Settings' data-toggle='tooltip')
+                    i.material-icons &#xE8B8;
+                  a.delete(href='#' title='Delete' data-toggle='tooltip')
+                    i.material-icons &#xE5C9;
+              tr
+                td 4
+                td Mary Saveley
+                td 06/09/2016
+                td 234234234
+                
+                td
+                  a.settings(href='#' title='Settings' data-toggle='tooltip')
+                    i.material-icons &#xE8B8;
+                  a.delete(href='#' title='Delete' data-toggle='tooltip')
+                    i.material-icons &#xE5C9;
+              tr
+                td 5
+                td  Martin Sommer
+                td 12/08/2017
+                td 3423423423
+                
+                td
+                  a.settings(href='#' title='Settings' data-toggle='tooltip')
+                    i.material-icons &#xE8B8;
+                  a.delete(href='#' title='Delete' data-toggle='tooltip')
+                    i.material-icons &#xE5C9;
+          
+        
