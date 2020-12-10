@@ -83,9 +83,9 @@ router.post('/search',async function(req,res,next){
   res.render('menu/menu',  {title: 'menu', dishes});
 });
 router.get('/menu/:id',async function(req,res,next){
+  Redirect(req,res,`/menu/${id}`)
   const id=req.params.id;
   const dish=await Dish.findOne({where:{id:id}});
-  Redirect(req,res,`/menu/${id}`)
   res.render('menu/dishDetail',  {title: 'menu',dish});
 });
 //signup

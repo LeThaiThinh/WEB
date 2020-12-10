@@ -5,6 +5,10 @@ block append topbar
 block append content
     if pendingReservation.length!=0
         p=`${pendingReservation[0].state}`
+        .dish-form
+                form(action=`reserve/${pendingReservation[0].id}/cancel`, method="post")
+                  .formInput
+                    button(type="submit") cancel request
     else  
         +reserveFormUser
         

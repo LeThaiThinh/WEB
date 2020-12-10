@@ -79,13 +79,29 @@ router.post('/:username/user/search',async function(req,res,next){
 router.get('/:username/user/menu/:id',async function(req,res,next){
   const id=req.params.id;
   const dish=await Dish.findOne({where:{id:id}});
-  res.render('menu/dishDetail',  {title: 'menu',dish:dish});
+  res.render('menu/dishDetailUser',  {title: 'menu',dish:dish});
+});
+router.post('/:username/user/menu/:id/rate',async function(req,res,next){
+  rate=req.body
+  //res.json(rate)
+  // const dish=await Dish.findOne({where:{id:id}});
+  // res.render('menu/dishDetailUser',  {title: 'menu',dish:dish});
+  res.redirect(`/:username/user/menu/${req.params.id}`)
 });
 //reservation
 router.get('/:username/user/reserve',async function(req,res,next){
   const username=req.params.username;
   const user=await User.findOne({where:{username: username}})
-  const pendingReservation=await user.getReservations({where:{state:{[Op.not]:"done"}}})
+  const pendingReservation=await user.getReservations({
+    where:{
+      state:{
+        [Op.and]:{
+          [Op.not]:"done",
+          [Op.not]:"cancel"
+          }
+        }
+  }})
+  //res.json(pendingReservation)
   res.render('reserve/reserveUser', {title:'reserve',pendingReservation:pendingReservation})
 })
 router.post('/:username/user/reserve',async function(req,res,next){
@@ -96,10 +112,28 @@ router.post('/:username/user/reserve',async function(req,res,next){
     reservation.state="await"
     reservation.userId=user.id
     await Reservation.create(reservation)
-  res.redirect('/:username/user/reserve')
+    res.redirect(`/${req.params.username}/user/reserve`)
   }catch(err){
     console.log(err);
   }
+})
+router.post('/:username/user/reserve/:id/cancel',async function(req,res,next){
+    
+    const r=await Reservation.update(
+        {state:"cancel"},
+        {
+        include:[{
+          model:User ,
+          where:{
+          username:req.params.username
+          }
+        }],
+        where:{
+          id:req.params.id
+        }
+    })
+    //res.json(r)
+    res.redirect(`/${req.params.username}/user/reserve`)
 })
 
 module.exports = router;

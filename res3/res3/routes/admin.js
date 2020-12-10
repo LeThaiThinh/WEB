@@ -120,13 +120,18 @@ router.get('/reserve',async function(req,res,next){
     const reservations=await Reservation.findAll({include:[User],
       order:[["id","DESC"]],
       where:{
-      state:{[Op.not]:"done"}
-      }
-    })
+      state:{[Op.or]:{
+        [Op.not]:"done",
+        [Op.not]:"cancel"
+      }}
+    }})
     const reservationsDone=await Reservation.findAll({include:[User],
       order:[["id","DESC"]],
       where:{
-      state:"done"
+      state:{[Op.or]:{
+        [Op.not]:"done",
+        [Op.not]:"cancel"
+      }}
       }
     })
     // var datetime=reservations[0].datetime.toString();
@@ -142,13 +147,10 @@ router.post('/reserve/datetime/:id',async function(req,res,next){
   }
   res.redirect('/admin/reserve')
 })
-router.post('/reserve/datetime/:id',async function(req,res,next){
-  datetime=req.body.datetime
-  if(datetime!=""){
-    await Reservation.update({datetime:datetime},
-      {where:{userId:req.params.id}}
-    )
-  }
+router.post('/reserve/remove/:id',async function(req,res,next){
+  await Reservation.update({state:"done"},
+    {where:{userId:req.params.id}}
+  )
   res.redirect('/admin/reserve')
 })
 //account

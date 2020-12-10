@@ -1,7 +1,7 @@
 extends ../index
-include ../mixins/dishDetailUser/dishDetailUser
+include ../mixins/dishDetail/dishDetailUser
 block append topbar
-    +topbar      
+    +topbarUser   
 block append sidebar-text
             .edit-text
                 p THIS IS OUR MENU!
@@ -12,3 +12,21 @@ block append content
     .wrap-content
         .menu
             +dishDetailUser(dish)
+            
+            .rate
+                form(action=`${dish.id}/rate`, method="post")
+                    button(type="submit") Bạn đánh giá món ăn này
+                    fieldset.rating
+                        legend Rate
+                        input(type="radio" name="rating" value=5 id="1star") 
+                        label(for="1star" name="rating")
+                        input(type="radio" name="rating" value=4 id="2star")
+                        label(for="2star" name="rating")
+                        input(type="radio" name="rating" value=3 id="3star")
+                        label(for="3star" name="rating")
+                        input(type="radio" name="rating" value=2 id="4star")
+                        label(for="4star" name="rating")
+                        input(type="radio" name="rating" value=1 id="5star") 
+                        label(for="5star" name="rating")
+                        
+                        
