@@ -16,7 +16,7 @@ block body
                       label(for="birthOfDate") birthOfDate:
                     input(type="birthOfDate", name="username" value=`${user.birthOfDate}`)
                     button(type="submit") edit
-        .dish-form        
+        .dish-form
                 form(action=`${user.id}/phone`, method="post")
                   .formInput
                     a(href=`/admin/account/${user.id}`)
