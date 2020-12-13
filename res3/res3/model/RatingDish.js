@@ -9,7 +9,6 @@ const sequelize = new Sequelize(pathSql, {
 const RatingDish=sequelize.define('ratingDish',{
     rating:{
         type:Sequelize.INTEGER,
-        allowNull:false,
     },
 })
 module.exports=RatingDish;

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const Op = require('sequelize').Op;
-const {Dish,Reservation,User}=require("../model/relation")
+const {Dish,Reservation,User,RatingDish}=require("../model/relation")
 /*ADMIN*/
 // home
 router.get('/',function(req,res,next){
@@ -76,8 +76,11 @@ router.post('/search',async function(req,res,next){
   }
   if(ratingOrder){
     dishes= await Dish.findAll({
+      through:[{
+        model: RatingDish,
+        order: [['rating', ratingOrder]],
+      }],
       raw:true ,
-      order: [['rating', ratingOrder]],
       where:{
         [Op.and]: [
           {'nameDish':{[Op.substring]: nameDish}},
@@ -87,7 +90,9 @@ router.post('/search',async function(req,res,next){
       }
       })
   }
-  res.render('menu/menu',  {title: 'menu', dishes});
+  const search=req.body
+  // res.json(search)
+  res.render('menu/menuAdmin',  {title: 'menu', search:search,dishes:dishes,});
 });
 router.get('/menu/:id',async function(req,res,next){
     const id=req.params.id;
@@ -100,8 +105,9 @@ router.post('/menu/:id/remove',async function(req,res,next){
     res.redirect('/admin/menu')
 });
 router.get('/menu/:id/edit',async function(req,res,next){
-    const dishes=await Dish.findAll({raw:true});
-    res.render('menu/edit',  {title: 'edit',dishes});
+    const id=req.params.id
+    const dish=await Dish.findOne({raw:true,where:{id:id}});
+    res.render('menu/edit',  {title: 'edit',dish});
 });
 router.post('/menu/:id/edit',async function(req,res,next){
     try{

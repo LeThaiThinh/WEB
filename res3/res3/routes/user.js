@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const Op = require('sequelize').Op;
-const {Dish,Reservation,User}=require("../model/relation")
+const {Dish,Reservation,User,RatingDish}=require("../model/relation")
 var app = express();
 /* GET userlisting. */
 router.get('/:username/user/', function(req, res, next) {
@@ -82,11 +82,20 @@ router.get('/:username/user/menu/:id',async function(req,res,next){
   res.render('menu/dishDetailUser',  {title: 'menu',dish:dish});
 });
 router.post('/:username/user/menu/:id/rate',async function(req,res,next){
-  rate=req.body
-  //res.json(rate)
-  // const dish=await Dish.findOne({where:{id:id}});
-  // res.render('menu/dishDetailUser',  {title: 'menu',dish:dish});
-  res.redirect(`/:username/user/menu/${req.params.id}`)
+  const username=req.params.username
+  //res.json(req.body.rating)
+  if(req.body.rating==null){
+    res.redirect(`/${username}/user/menu/${req.params.id}`)
+  } 
+  var ratingDish=req.body
+  
+  
+  const user=await User.findOne({where:{username: req.params.username}})
+  ratingDish.dishId=req.params.id
+  ratingDish.userId=user.id
+  //res.json(ratingDish)
+  await RatingDish.create(ratingDish);
+  res.redirect(`/${username}/user/menu/${req.params.id}`)
 });
 //reservation
 router.get('/:username/user/reserve',async function(req,res,next){

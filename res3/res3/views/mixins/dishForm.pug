@@ -1,26 +1,24 @@
-mixin dishForm
+mixin dishForm(dish={})
     .dish-form
         form(action="", method="post" class="dish-form-1")
             .formInput
-                input(type="text", name="nameDish" required class="text-box" placeholder="Dish name")
+                input(type="text", name="nameDish" required class="text-box" placeholder="Dish name" value=dish.nameDish)
             .formInput
-                input(type="text", name="description" required class="text-box" placeholder="Description")
+                input(type="text", name="description" required class="text-box" placeholder="Description" value=dish.description)
             .formInput
-                input(type="number", name="cost" required class="text-box" placeholder="Cost")
-            .formInput
-                input(type="number", name="rating" min="1" max="5" required class="text-box" placeholder="Rating")
+                input(type="number", name="cost" required class="text-box" placeholder="Cost" value=dish.cost)
             //- .formInput
             //-     input(type="file", name="image" required style="margin-bottom: 10px;" placeholder="Choose image" class="text-box")
             .file-upload
                 .file-select
                     #fileName.file-select-button Choose File
                     #noFile.file-select-name No file chosen...
-                    input#chooseFile(type="file", name="image" required style="margin-bottom: 10px;")
+                    input#chooseFile(type="file", name="image" required style="margin-bottom: 10px;" value=dish.image)
 
             .formInput
                 .availability
                     label(for="available" ) available&ensp;
-                    input(type="radio", name="available" value="true" checked )
+                    input(type="radio", name="available" value="true" )
                 .availability 
                     label(for="available" ) unavailable&ensp;
                     input(type="radio", name="available" value="false")        

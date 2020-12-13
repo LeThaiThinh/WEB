@@ -1,12 +1,12 @@
-mixin searchForm
+mixin searchForm(search={})
     .dish-form
         form(action="search", method="post" class="dish-form-1" autocomplete)
             .formInput
-                input(type="text", name="nameDish" class="text-box" placeholder="Dish name")
+                input(type="text", name="nameDish" class="text-box" placeholder="Dish name" value=search.nameDish)
             .formInput
-                input(type="number", name="costMax" min="1" class="text-box" placeholder="costMax")
+                input(type="number", name="costMax" min="1" class="text-box" placeholder="costMax" value=search.costMax)
             .formInput
-                input(type="number", name="costMin" min="1" class="text-box" placeholder="costMin")
+                input(type="number", name="costMin" min="1" class="text-box" placeholder="costMin" value=search.costMin)
             
             .formInput
                 .availability
@@ -15,13 +15,41 @@ mixin searchForm
                 .availability
                     label(for="available" ) unavailable&ensp;
                     input(type="radio", name="available" value="false")   
-            .formInput
-                select(name="order" value=null class="order")
-                    optgroup(label="order by cost")
-                        option(value="increaseCost") increase cost
-                        option(value="decreaseCost") decrease cost
-                    optgroup(label="order by rating")    
-                        option(value="increaseRating") increase rating
-                        option(value="decreaseRating") decrease rating             
+            if search.order=="increaseCost"
+                .formInput
+                    select(name="order" class="order")
+                        optgroup(label="order by cost")
+                            option(value="increaseCost" selected) increase cost
+                            option(value="decreaseCost") decrease cost
+                        optgroup(label="order by rating")    
+                            option(value="increaseRating") increase rating
+                            option(value="decreaseRating") decrease rating            
+            if search.order=="decreaseCost"
+                .formInput
+                    select(name="order" class="order")
+                        optgroup(label="order by cost")
+                            option(value="increaseCost") increase cost
+                            option(value="decreaseCost" selected) decrease cost
+                        optgroup(label="order by rating")    
+                            option(value="increaseRating") increase rating
+                            option(value="decreaseRating") decrease rating            
+            if search.order=="increaseRating"
+                .formInput
+                    select(name="order" class="order")
+                        optgroup(label="order by cost")
+                            option(value="increaseCost") increase cost
+                            option(value="decreaseCost" ) decrease cost
+                        optgroup(label="order by rating")    
+                            option(value="increaseRating" selected) increase rating
+                            option(value="decreaseRating") decrease rating            
+            if search.order=="decreaseRating"
+                .formInput
+                    select(name="order" class="order")
+                        optgroup(label="order by cost")
+                            option(value="increaseCost") increase cost
+                            option(value="decreaseCost" ) decrease cost
+                        optgroup(label="order by rating")    
+                            option(value="increaseRating") increase rating
+                            option(value="decreaseRating" selected) decrease rating                                          
             .formInput
                 button(type="submit" class="form-button" ) Confirm

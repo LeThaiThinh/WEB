@@ -1,7 +1,7 @@
 var express = require('express');
 const Op = require('sequelize').Op;
 var router = express.Router();
-const {Dish,Reservation,User}=require("../model/relation")
+const {Dish,Reservation,User,RatingDish}=require("../model/relation")
 const {check,validationResult}=require("express-validator")
 const {santitize, sanitize}=require("express-validator")
 function Redirect(req,res,params){

@@ -23,4 +23,4 @@ User.sync(
     //{ force:true}
     ).then(() => {
 });
-module.exports={Dish:Dish,Reservation:Reservation,User:User}
+module.exports={Dish:Dish,Reservation:Reservation,User:User,RatingDish:RatingDish}
