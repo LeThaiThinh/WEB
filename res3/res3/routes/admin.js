@@ -180,6 +180,7 @@ router.get('/account/:id',async function(req,res,next){
 router.post('/account/:id/username',async function(req,res,next){
   try{
     const id=req.params.id;
+    
     await User.update({username:req.body.username},
       {where:{id:id}}
       )
@@ -191,6 +192,7 @@ router.post('/account/:id/username',async function(req,res,next){
 router.post('/account/:id/dateOfBirth',async function(req,res,next){
   try{
     const id=req.params.id;
+    // res.json(req.body.dateOfBirth)
     await User.update({dateOfBirth:req.body.dateOfBirth},
       {where:{id:id}}
       )

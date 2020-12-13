@@ -1,7 +1,7 @@
 extends ../index
 include ../mixins/dishDetail/dishDetailUser
 block append topbar
-    +topbarUser   
+    +topbarUser(user)  
 block append sidebar-text
             .edit-text
                 p THIS IS OUR MENU!
@@ -10,23 +10,20 @@ block append sidebar-text
                 | I&apos;m a paragraph. Click here to add your own text and edit me. It&rsquo;s easy. Just click &ldquo;Edit Text&rdquo; or double click me to add your own content and make changes to the font.
 block append content
     .wrap-content
-        .menu
+        .menu-detail
             +dishDetailUser(dish)
             
-            .rate
-                form(action=`${dish.id}/rate`, method="post")
-                    button(type="submit") Bạn đánh giá món ăn này
-                    fieldset.rating
-                        legend Rate
-                        input(type="radio" name="rating" value=5 id="1star") 
-                        label(for="1star" name="rating")
-                        input(type="radio" name="rating" value=4 id="2star")
-                        label(for="2star" name="rating")
-                        input(type="radio" name="rating" value=3 id="3star")
-                        label(for="3star" name="rating")
-                        input(type="radio" name="rating" value=2 id="4star")
-                        label(for="4star" name="rating")
-                        input(type="radio" name="rating" value=1 id="5star") 
-                        label(for="5star" name="rating")
-                        
-                        
+            form(action=`${dish.id}/rate`, method="post" class="rate")
+                fieldset.rating
+                    input(type="radio" name="rating" value=5 id="1star") 
+                    label(for="1star" name="rating")
+                    input(type="radio" name="rating" value=4 id="2star")
+                    label(for="2star" name="rating")
+                    input(type="radio" name="rating" value=3 id="3star")
+                    label(for="3star" name="rating")
+                    input(type="radio" name="rating" value=2 id="4star")
+                    label(for="4star" name="rating")
+                    input(type="radio" name="rating" value=1 id="5star") 
+                    label(for="5star" name="rating")
+                button(type="submit") Bạn đánh giá món ăn này
+                    

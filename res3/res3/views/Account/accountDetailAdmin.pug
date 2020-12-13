@@ -13,8 +13,8 @@ block append content
 
           form(action=`${user.id}/dateOfBirth`, method="post")
             .form-user  
-              label(for="birthOfDate") BirthOfDate:
-              input(type="date", name="username" value=`${user.birthOfDate}`)
+              label(for="dateOfBirth") DateOfBirth:
+              input(type="date", name="dateOfBirth" value=`${user.dateOfBirth}`)
               button(type="submit" class="btn btn-secondary" ) edit
 
           form(action=`${user.id}/phone`, method="post")

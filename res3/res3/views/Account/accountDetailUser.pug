@@ -1,6 +1,6 @@
 extends ../index
 block append topbar
-    +topbarUser
+    +topbarUser(user)
 block append content
   .wrap-content
      .wrap-account      
@@ -9,13 +9,13 @@ block append content
               label(for="username") Username:
               input(type="text", name="username" value=`${user.username}`)
               //- button(type="submit") edit
-             
+              
 
           form(action=`${user.id}/dateOfBirth`, method="post")
             .form-user  
               label(for="birthOfDate") BirthOfDate:
-              input(type="date", name="username" value=`${user.birthOfDate}`)
-             
+              input(type="date", name="username" value=`${user.dateOfBirth}`)
+              
 
           form(action=`${user.id}/phone`, method="post")
             .form-user

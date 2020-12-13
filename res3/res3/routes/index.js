@@ -83,8 +83,8 @@ router.post('/search',async function(req,res,next){
   res.render('menu/menu',  {title: 'menu', dishes});
 });
 router.get('/menu/:id',async function(req,res,next){
-  Redirect(req,res,`/menu/${id}`)
   const id=req.params.id;
+  Redirect(req,res,`/menu/${id}`)
   const dish=await Dish.findOne({where:{id:id}});
   res.render('menu/dishDetail',  {title: 'menu',dish});
 });

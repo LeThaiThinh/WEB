@@ -12,8 +12,10 @@ router.get('/:username/user/',async function(req, res, next) {
 // menu
 router.get('/:username/user/menu',async function(req,res,next){
   try{
+    const username=req.params.username;
+    const user=await User.findOne({where:{username: username}}) 
     const dishes= await Dish.findAll({raw:true})
-    res.render('menu/menuUser',  {title: 'menu', dishes:dishes});
+    res.render('menu/menuUser',  {title: 'menu', dishes:dishes,user:user});
   }catch(error){
     next(error)
   }
@@ -76,15 +78,20 @@ router.post('/:username/user/search',async function(req,res,next){
       }
       })
   }
-  res.render('menu/menu',  {title: 'menu', dishes});
+  const username=req.params.username;
+  const user=await User.findOne({where:{username: username}}) 
+  res.render('menu/menu',  {title: 'menu', dishes:dishes,user:user});
 });
 router.get('/:username/user/menu/:id',async function(req,res,next){
   const id=req.params.id;
   const dish=await Dish.findOne({where:{id:id}});
-  res.render('menu/dishDetailUser',  {title: 'menu',dish:dish});
+  const username=req.params.username;
+  const user=await User.findOne({where:{username: username}}) 
+  res.render('menu/dishDetailUser',  {title: 'menu',dish:dish,user:user});
 });
 router.post('/:username/user/menu/:id/rate',async function(req,res,next){
   const username=req.params.username
+  
   //res.json(req.body.rating)
   if(req.body.rating==null){
     res.redirect(`/${username}/user/menu/${req.params.id}`)
@@ -102,18 +109,27 @@ router.post('/:username/user/menu/:id/rate',async function(req,res,next){
 //reservation
 router.get('/:username/user/reserve',async function(req,res,next){
   const username=req.params.username;
+  
   const user=await User.findOne({where:{username: username}})
   const pendingReservation=await user.getReservations({
     where:{
       state:{
         [Op.and]:{
           [Op.not]:"done",
-          [Op.not]:"cancel"
+          [Op.not]:"cancel",
           }
         }
   }})
-  //res.json(pendingReservation)
-  res.render('reserve/reserveUser', {title:'reserve',pendingReservation:pendingReservation})
+  const reservations=await user.getReservations({
+    where:{
+      state:{
+        [Op.or]:[
+          { [Op.like]:"done"},
+          { [Op.like]:"cancel"},
+        ]}
+  }})
+  // res.json(reservation)
+  res.render('reserve/reserveUser', {title:'reserve',pendingReservation:pendingReservation,user:user,reservations:reservations})
 })
 router.post('/:username/user/reserve',async function(req,res,next){
   try{

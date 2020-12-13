@@ -1,10 +1,13 @@
 mixin reserveFormUser
-    form(action="", method="post")
-        .formInput
-            label(for="datetime") Time :
-            input(type="datetime-local", name="datetime" required)
-        .formInput
-            label(for="partySize") Size Of Party :
-            input(type="number", name="partySize" required)
-        .formInput
-            button(type="submit") Confirm
+
+    
+        form(action="", method="post" class="form-reserve")
+            .formInput-reserve
+                label(for="datetime") Time :
+                input(type="datetime-local", name="datetime" required)
+            .formInput-reserve
+                label(for="partySize") Size Of Party :
+                input(type="number", name="partySize" required)
+            .formInput-reserve
+                
+                <button type="submit" class="btn btn-light">Confirm</button>
