@@ -8,7 +8,7 @@ User.hasMany(Reservation)
 Reservation.belongsTo(User)
 Dish.belongsToMany(User,{through:RatingDish})
 RatingDish.sync(
-    {force:true}
+    // {force:true}
     ).then(() => {
 })
 Dish.sync(

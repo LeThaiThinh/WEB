@@ -172,27 +172,15 @@ router.get('/account/:id',async function(req,res,next){
   try{
     id=req.params.id;
     const user=await User.findOne({raw:true, where: { id:id }})
-    res.render('account/accountDetail',{title:'accountDetail',user})
+    res.render('account/accountDetailAdmin',{title:'accountDetail',user})
   }catch(error){
     next(error)
   }
 })
-router.post('/:id/username',async function(req,res,next){
+router.post('/account/:id/username',async function(req,res,next){
   try{
     const id=req.params.id;
-    await User.update(username,
-      {where:{id:id}}
-      )
-    res.redirect('/account');
-  }catch(error){
-       next(error)
-  }
-})
-router.post('/:id/dateOfBirth',async function(req,res,next){
-  try{
-    const id=req.params.id;
-    res.json(req)
-    await User.update('dateOfBirth',
+    await User.update({username:req.body.username},
       {where:{id:id}}
       )
     res.redirect('/admin/account');
@@ -200,11 +188,10 @@ router.post('/:id/dateOfBirth',async function(req,res,next){
        next(error)
   }
 })
-router.post('/:id/phone',async function(req,res,next){
+router.post('/account/:id/dateOfBirth',async function(req,res,next){
   try{
     const id=req.params.id;
-    res.json(req)
-    await User.update('phone',
+    await User.update({dateOfBirth:req.body.dateOfBirth},
       {where:{id:id}}
       )
     res.redirect('/admin/account');
@@ -212,7 +199,18 @@ router.post('/:id/phone',async function(req,res,next){
        next(error)
   }
 })
-router.post('/:id/remove',async function(req,res,next){
+router.post('/account/:id/phone',async function(req,res,next){
+  try{
+    const id=req.params.id;
+    await User.update({phone:req.body.phone},
+      {where:{id:id}}
+      )
+    res.redirect('/admin/account');
+  }catch(error){
+       next(error)
+  }
+})
+router.post('/account/:id/remove',async function(req,res,next){
   try{
     const id=req.params.id;
     await User.destroy({where:{id:id}})

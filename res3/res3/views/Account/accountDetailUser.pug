@@ -1,0 +1,24 @@
+extends ../index
+block append topbar
+    +topbarUser
+block append content
+  .wrap-content
+     .wrap-account      
+          form(action=`${user.id}/username`, method="post")
+            .form-user 
+              label(for="username") Username:
+              input(type="text", name="username" value=`${user.username}`)
+              //- button(type="submit") edit
+             
+
+          form(action=`${user.id}/dateOfBirth`, method="post")
+            .form-user  
+              label(for="birthOfDate") BirthOfDate:
+              input(type="date", name="username" value=`${user.birthOfDate}`)
+             
+
+          form(action=`${user.id}/phone`, method="post")
+            .form-user
+              label(for="phone") Phone:
+              input(type="tel", name="phone" value=`${user.phone}`)
+              

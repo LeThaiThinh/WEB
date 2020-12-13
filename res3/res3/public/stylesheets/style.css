@@ -162,10 +162,13 @@ p {
   flex-direction: column;
   margin-top: 10%;
 }
-.formInput {
+.formInput,.form-user {
   display: flex;
   flex-direction: row;
   
+}
+.form-user{
+  margin-bottom: 10px;
 }
 .text-box {
   background-color: rgb(101 101 101 / 60%);
@@ -564,6 +567,7 @@ table.table tr th, table.table tr td {
   border-color: #e9e9e9;
   padding: 12px 15px;
   vertical-align: middle;
+  
 }
 table.table tr th:first-child {
   width: 60px;
@@ -655,5 +659,13 @@ table.table .avatar {
   margin-top: 10px;
   font-size: 13px;
 }
-
- 
+.wrap-account {
+  margin: 50px;
+}
+.form-user>label {
+  min-width:100px ;
+  color: white;
+} 
+.btn-info {
+  margin-top: 10px;
+}
