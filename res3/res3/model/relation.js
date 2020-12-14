@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const Dish = require("./dish");
-const {RatingDish} = require('./RatingDish');
+const RatingDish = require('./RatingDish');
 const Reservation = require("./reservation");
 const User = require("./user");
 
@@ -8,7 +8,7 @@ User.hasMany(Reservation)
 Reservation.belongsTo(User)
 Dish.belongsToMany(User,{through:RatingDish})
 RatingDish.sync(
-    {force:true}
+    //{force:true}
     ).then(() => {
 })
 Dish.sync(
