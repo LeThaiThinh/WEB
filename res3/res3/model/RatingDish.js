@@ -11,4 +11,4 @@ const RatingDish=sequelize.define('ratingDish',{
         type:Sequelize.INTEGER,
     },
 })
-module.exports=RatingDish;
+module.exports={RatingDish:RatingDish,sequelize:sequelize};
