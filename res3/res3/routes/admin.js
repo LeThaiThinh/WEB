@@ -180,9 +180,7 @@ router.get('/account/:id',async function(req,res,next){
 router.post('/:id/username',async function(req,res,next){
   try{
     const id=req.params.id;
-    
     await User.update({username:req.body.username},
-    await User.update(username,
       {where:{id:id}}
       )
     res.redirect('/account');
@@ -193,13 +191,8 @@ router.post('/:id/username',async function(req,res,next){
 router.post('/:id/dateOfBirth',async function(req,res,next){
   try{
     const id=req.params.id;
-<<<<<<< HEAD
     // res.json(req.body.dateOfBirth)
     await User.update({dateOfBirth:req.body.dateOfBirth},
-=======
-    res.json(req)
-    await User.update('dateOfBirth',
->>>>>>> parent of 1c1ac10... good
       {where:{id:id}}
       )
     res.redirect('/admin/account');

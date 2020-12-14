@@ -468,14 +468,18 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .rating { 
   border: none;
+<<<<<<< HEAD
   float: right;
   color: white;
   text-align: center;
   margin-right: 32.5%;
+=======
+  float: left;
+>>>>>>> parent of 072b8bf... update
 }
 .rating > label { 
-  color: #ddd;
-  float: right;
+  color: #ddd; 
+ float: right; 
 }
 .rating > input { display: none; } 
 .rating > label:before { 
@@ -690,104 +694,4 @@ table.table .avatar {
 } 
 .btn-info {
   margin-top: 10px;
-}
-input[type="datetime-local"]::-webkit-datetime-edit-year-field {
-   margin-right: 20px;
-  }
-input[type="datetime-local"]::-webkit-datetime-edit  {
-  text-align: center;
-  color: white;
-  background-color:#1e1e1e;
-}
-input[type="datetime-local"]::-webkit-calendar-picker-indicator {
-  color: white;
-  /* background: #1e1e1e; */
-  opacity: 1;
-  display: block;
-  background: url(../icon/icons8-calendar-24.png) no-repeat;
-  width: 20px;
-  height: 20px;
-  border-width: thin;
-  cursor: pointer;
-}
-/* .md-form.md-outline label.active {
-    left: 8px;
-    padding-right: 5px;
-    padding-left: 5px;
-    font-weight: 500;
-    background: #fff;
-    -webkit-transform: translateY(-13px) scale(0.8);
-    transform: translateY(-13px) scale(0.8);
-} */
-.form-reserve {
-  margin: 100px;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  
-}
-
-.formInput-reserve>label{
-  /* -webkit-transform: translateY(-13px) scale(0.8); */
-  transform: translateY(-12px) translateX(169px) scale(0.8);
-  left: 8px;
-  padding-right: 5px;
-  padding-left: 5px;
-  font-weight: 500;
-  background-color: #1e1e1e;
-  left: 8px;
-  padding-right: 5px;
-  padding-left: 5px;
-  font-weight: 500;
-  background-color: #1e1e1e;
-  position: absolute;
-  /* color: white; */
-}
-.formInput-reserve {
-  text-align: center;
-  margin-bottom: 10px;
-}
-.formInput-reserve>input{
-  border: 0.5px solid #dadce0;
-  padding: 0px;
-  background-color: #1e1e1e;
-  min-width: 257px;
-  margin-bottom: 10px;
-  color: white;
-  padding: 5px;
-  padding-left: 10px;
-  
-}
-.formInput-reserve>button {
-  line-height: 15px;
-  width: 65%;
-  border-radius: 0;
-  min-height: 40px;
-  background-color: #ffffffdb;
-}
-
-input[type="datetime-local"]::-webkit-calendar-picker {
-  background: black;
-}
-.form-check {
-  margin: 100px;
-  color: white;
-}
-/* .form-box-reservation {
-  min-width: 300px;
-  min-height: 50px;
-  border: white 0.5px solid;
-  margin: 5px;
-  text-align: left ;
-  
-  
-}
-.form-box-reservation > p {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 10px;
-} */
-.rate {
-  display: flex;
-  flex-direction: column;
 }

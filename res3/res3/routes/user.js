@@ -10,8 +10,6 @@ router.get('/:username/user/', function(req, res, next) {
 // menu
 router.get('/:username/user/menu',async function(req,res,next){
   try{
-    const username=req.params.username;
-    const user=await User.findOne({where:{username: username}}) 
     const dishes= await Dish.findAll({raw:true})
   //   const ratingDish= await RatingDish.findAll({
   //     attributes: ['dishId', [Sequelize.fn('AVG', 
@@ -83,9 +81,7 @@ router.post('/:username/user/search',async function(req,res,next){
       }
       })
   }
-  const username=req.params.username;
-  const user=await User.findOne({where:{username: username}}) 
-  res.render('menu/menu',  {title: 'menu', dishes:dishes,user:user});
+  res.render('menu/menu',  {title: 'menu', dishes});
 });
 router.get('/:username/user/menu/:id',async function(req,res,next){
   const id=req.params.id;
@@ -116,27 +112,18 @@ router.post('/:username/user/menu/:id/rate',async function(req,res,next){
 //reservation
 router.get('/:username/user/reserve',async function(req,res,next){
   const username=req.params.username;
-  
   const user=await User.findOne({where:{username: username}})
   const pendingReservation=await user.getReservations({
     where:{
       state:{
         [Op.and]:{
           [Op.not]:"done",
-          [Op.not]:"cancel",
+          [Op.not]:"cancel"
           }
         }
   }})
-  const reservations=await user.getReservations({
-    where:{
-      state:{
-        [Op.or]:[
-          { [Op.like]:"done"},
-          { [Op.like]:"cancel"},
-        ]}
-  }})
-  // res.json(reservation)
-  res.render('reserve/reserveUser', {title:'reserve',pendingReservation:pendingReservation,user:user,reservations:reservations})
+  //res.json(pendingReservation)
+  res.render('reserve/reserveUser', {title:'reserve',pendingReservation:pendingReservation})
 })
 router.post('/:username/user/reserve',async function(req,res,next){
   try{

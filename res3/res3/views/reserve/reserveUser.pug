@@ -1,34 +1,14 @@
 extends ../index
 include ../mixins/reserve/reserveFormUser
 block append topbar
-    +topbarUser(user)
+    +topbarUser
 block append content
-    .wrap-content
-        .form-check
-            if pendingReservation.length!=0
-               
+    if pendingReservation.length!=0
+        p=`${pendingReservation[0].state}`
+        .dish-form
                 form(action=`reserve/${pendingReservation[0].id}/cancel`, method="post")
+                  .formInput
                     button(type="submit") cancel request
-            else  
-                +reserveFormUser
-            <table class="table table-dark">
-            thead
-                tr
-                    <th scope="col">#</th>
-                    <th scope="co00000l">Party Size</th>
-                    <th scope="col">Date Time</th>
-                    <th scope="col">Status</th>
-                    th sth
-            <tbody>
-                each reservation in reservations
-                    <tr>
-                        th(scope="row")=reservation.id
-                        td=reservation.partySize
-                        td=reservation.datetime0
-                        td=reservation.state
-                        td
-                            form(action=`reserve/${pendingReservation[0].id}/cancel`, method="post")
-                                button(type="submit") cancel request
-                    </tr>  
-            </tbody>
-            </table>               
+    else  
+        +reserveFormUser
+        
