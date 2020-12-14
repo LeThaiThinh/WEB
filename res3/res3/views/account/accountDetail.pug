@@ -1,0 +1,29 @@
+extends ../index
+block append topbar
+    +topbarAdmin
+block body
+        .dish-form
+                form(action=`${user.id}/username`, method="post")
+                  .formInput 
+                    a(href=`/admin/account/${user.id}`)    
+                      label(for="username") Username:
+                    input(type="text", name="username" value=`${user.username}`)
+                    button(type="submit") edit
+        .dish-form
+                form(action=`${user.id}/dateOfBirth`, method="post")
+                  .formInput  
+                    a(href=`/admin/account/${user.id}`)    
+                      label(for="birthOfDate") birthOfDate:
+                    input(type="birthOfDate", name="username" value=`${user.birthOfDate}`)
+                    button(type="submit") edit
+        .dish-form
+                form(action=`${user.id}/phone`, method="post")
+                  .formInput
+                    a(href=`/admin/account/${user.id}`)
+                      label(for="phone") Phone:
+                    input(type="tel", name="phone" value=`${user.phone}`)
+                    button(type="submit") edit
+        .dish-form
+                form(action=`${user.id}/remove`, method="post")
+                  .formInput
+                    button(type="submit") remove account

@@ -4,10 +4,8 @@ const Op = require('sequelize').Op;
 const {Dish,Reservation,User,RatingDish}=require("../model/relation")
 var app = express();
 /* GET userlisting. */
-router.get('/:username/user/',async function(req, res, next) {
-  const username=req.params.username;
-  const user=await User.findOne({where:{username: username}}) 
-  res.render('home/homeUser', { title: 'homeUser' ,user});
+router.get('/:username/user/', function(req, res, next) {
+  res.render('home/homeUser', { title: 'homeUser' });
 });
 // menu
 router.get('/:username/user/menu',async function(req,res,next){
@@ -21,7 +19,7 @@ router.get('/:username/user/menu',async function(req,res,next){
   //     group: ['dishId'],
   //     order: [[Sequelize.fn('AVG', Sequelize.col('rating')), 'DESC']]
   // })
-    console.log(ratingDish )
+    //console.log(ratingDish )
     res.render('menu/menuUser',  {title: 'menu', dishes:dishes,user:user});
   }catch(error){
     next(error)
@@ -172,10 +170,4 @@ router.post('/:username/user/reserve/:id/cancel',async function(req,res,next){
     res.redirect(`/${req.params.username}/user/reserve`)
 })
 
-//account
-router.get('/:username/user/profile',async function(req, res, next) {
-  const username=req.params.username;
-  const user=await User.findOne({where:{username: username}}) 
-  res.render('Account/accountDetailUser', { title: 'homeUser' ,user});
-});
 module.exports = router;

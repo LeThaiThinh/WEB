@@ -23,23 +23,61 @@ block append content
                 //- th Status
                 th Action
             tbody
-              each user in users
-                tr
-                  td=user.id
-                    //- a 1
-                  td=user.username
-                  td=user.dateOfBirth
-                  td=user.phone
-                  //- td  
-                  //-   span.status.text-success &bull;
-                  //-   |  Active
-                  td
-                    a.settings(href=`/admin/account/${user.id}` title='Settings' data-toggle='tooltip')
-                      i.material-icons &#xE8B8;
-
-                    //- form(action=`${user.id}/remove`, method="post")
-                    //-   .formInput
-                    //-     button.delete(type="submit" data-toggle='tooltip' title='Delete')  
-                    //-       i.material-icons &#xE5C9;
-                      
-              
+              tr
+                td=`${users[0].id}`
+                  //- a 1
+                td Michael Holz
+                td 04/10/2013
+                td 4234234324
+                //- td  
+                //-   span.status.text-success &bull;
+                //-   |  Active
+                td
+                  a.settings(href='#' title='Settings' data-toggle='tooltip')
+                    i.material-icons &#xE8B8;
+                  a.delete(href='#' title='Delete' data-toggle='tooltip')
+                    i.material-icons &#xE5C9;
+              tr
+                td 2
+                td Paula Wilson
+                td 05/08/2014
+                td 4234234324
+                
+                td
+                  a.settings(href='#' title='Settings' data-toggle='tooltip')
+                    i.material-icons &#xE8B8;
+                  a.delete(href='#' title='Delete' data-toggle='tooltip')
+                    i.material-icons &#xE5C9;
+              tr
+                td 3
+                td Antonio Moreno
+                td 11/05/2015
+                td 4324324234
+                
+                td
+                  a.settings(href='#' title='Settings' data-toggle='tooltip')
+                    i.material-icons &#xE8B8;
+                  a.delete(href='#' title='Delete' data-toggle='tooltip')
+                    i.material-icons &#xE5C9;
+              tr
+                td 4
+                td Mary Saveley
+                td 06/09/2016
+                td 234234234
+                
+                td
+                  a.settings(href='#' title='Settings' data-toggle='tooltip')
+                    i.material-icons &#xE8B8;
+                  a.delete(href='#' title='Delete' data-toggle='tooltip')
+                    i.material-icons &#xE5C9;
+              tr
+                td 5
+                td  Martin Sommer
+                td 12/08/2017
+                td 3423423423
+                
+                td
+                  a.settings(href='#' title='Settings' data-toggle='tooltip')
+                    i.material-icons &#xE8B8;
+                  a.delete(href='#' title='Delete' data-toggle='tooltip')
+                    i.material-icons &#xE5C9;
