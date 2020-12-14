@@ -15,6 +15,13 @@ router.get('/:username/user/menu',async function(req,res,next){
     const username=req.params.username;
     const user=await User.findOne({where:{username: username}}) 
     const dishes= await Dish.findAll({raw:true})
+  //   const ratingDish= await RatingDish.findAll({
+  //     attributes: ['dishId', [Sequelize.fn('AVG', 
+  //     Sequelize.col('rating')), 'ratingAvg']],
+  //     group: ['dishId'],
+  //     order: [[Sequelize.fn('AVG', Sequelize.col('rating')), 'DESC']]
+  // })
+    console.log(ratingDish )
     res.render('menu/menuUser',  {title: 'menu', dishes:dishes,user:user});
   }catch(error){
     next(error)
@@ -87,22 +94,24 @@ router.get('/:username/user/menu/:id',async function(req,res,next){
   const dish=await Dish.findOne({where:{id:id}});
   const username=req.params.username;
   const user=await User.findOne({where:{username: username}}) 
+  const ratingDish=await RatingDish.findOne({
+    where:{
+      [Op.and]:{ dishId:id,userId:user.id}
+      }
+    })
+  console.log(ratingDish)
   res.render('menu/dishDetailUser',  {title: 'menu',dish:dish,user:user});
 });
 router.post('/:username/user/menu/:id/rate',async function(req,res,next){
   const username=req.params.username
   
-  //res.json(req.body.rating)
   if(req.body.rating==null){
     res.redirect(`/${username}/user/menu/${req.params.id}`)
-  } 
+  }
   var ratingDish=req.body
-  
-  
   const user=await User.findOne({where:{username: req.params.username}})
   ratingDish.dishId=req.params.id
   ratingDish.userId=user.id
-  //res.json(ratingDish)
   await RatingDish.create(ratingDish);
   res.redirect(`/${username}/user/menu/${req.params.id}`)
 });
