@@ -117,6 +117,7 @@ router.get('/:username/user/reserve',async function(req,res,next){
         [Op.and]:{
           [Op.not]:"done",
           [Op.not]:"cancel",
+          
           }
         }
   }})
@@ -150,7 +151,7 @@ router.post('/:username/user/reserve/:id/cancel',async function(req,res,next){
         {state:"cancel"},
         {
         include:[{
-          model:User ,
+          model:User,
           where:{
           username:req.params.username
           }
