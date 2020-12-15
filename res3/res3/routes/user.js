@@ -4,8 +4,14 @@ const Op = require('sequelize').Op;
 const sequelize=require("../model/sequelize")
 const {Dish,Reservation,User,RatingDish}=require("../model/relation")
 var app = express();
+function Redirect(req,res){
+  if(!req.session.login){
+    res.redirect(`/login`)
+  }
+}
 /* GET userlisting. */
 router.get('/:username/user/',async function(req, res, next) {
+  Redirect(req,res)
   const username=req.params.username;
   const user=await User.findOne({where:{username: username}}) 
   res.render('home/homeUser', { title: 'homeUser' ,user});
@@ -13,6 +19,7 @@ router.get('/:username/user/',async function(req, res, next) {
 // menu
 router.get('/:username/user/menu',async function(req,res,next){
   try{
+    Redirect(req,res)
     const username=req.params.username;
     const user=await User.findOne({where:{username: username}}) 
     const dishes= await Dish.findAll({
@@ -38,7 +45,8 @@ router.get('/:username/user/menu',async function(req,res,next){
     next(error)
   }
 });
-router.post('/:username/user/search',async function(req,res,next){ 
+router.post('/:username/user/search',async function(req,res,next){
+  Redirect(req,res) 
   var costOrder="";
   var ratingOrder="";
   var costMax=1000;
@@ -128,6 +136,7 @@ router.post('/:username/user/search',async function(req,res,next){
   res.render('menu/menuUser',  {title: 'menu', dishes:dishes,user:user,search:req.body});
 });
 router.get('/:username/user/menu/:id',async function(req,res,next){
+  Redirect(req,res)
   const id=req.params.id;
   const username=req.params.username;
   const user=await User.findOne({where:{username: username}}) 
@@ -153,6 +162,7 @@ router.get('/:username/user/menu/:id',async function(req,res,next){
   res.render('menu/dishDetailUser',  {title: 'menu',dish:dish,user:user});
 });
 router.post('/:username/user/menu/:id/rate',async function(req,res,next){
+  Redirect(req,res)
   const username=req.params.username
   if(req.body.rating==null){
     res.redirect(`/${username}/user/menu/${req.params.id}`)
@@ -166,15 +176,15 @@ router.post('/:username/user/menu/:id/rate',async function(req,res,next){
 });
 //reservation
 router.get('/:username/user/reserve',async function(req,res,next){
+  Redirect(req,res)
   const username=req.params.username;
-  
   const user=await User.findOne({where:{username: username}})
   const pendingReservation=await user.getReservations({
     where:{
       state:{
         [Op.and]:{
           [Op.not]:"done",
-          [Op.not]:"cancel",
+          [Op.not]:"cancelled",
           }
         }
   }})
@@ -183,7 +193,7 @@ router.get('/:username/user/reserve',async function(req,res,next){
       state:{
         [Op.or]:[
           { [Op.like]:"done"},
-          { [Op.like]:"cancel"},
+          { [Op.like]:"cancelled"},
         ]}
   }})
   // res.json(reservation)
@@ -191,6 +201,7 @@ router.get('/:username/user/reserve',async function(req,res,next){
 })
 router.post('/:username/user/reserve',async function(req,res,next){
   try{
+    Redirect(req,res)
     const username=req.params.username;
     const user=await User.findOne({where:{username: username}})  
     const reservation=req.body
@@ -203,9 +214,9 @@ router.post('/:username/user/reserve',async function(req,res,next){
   }
 })
 router.post('/:username/user/reserve/:id/cancel',async function(req,res,next){
-    
+  Redirect(req,res)
     const r=await Reservation.update(
-        {state:"cancel"},
+        {state:"cancelled"},
         {
         include:[{
           model:User ,
@@ -223,6 +234,7 @@ router.post('/:username/user/reserve/:id/cancel',async function(req,res,next){
 
 //account
 router.get('/:username/user/profile',async function(req, res, next) {
+  Redirect(req,res)
   const username=req.params.username;
   const user=await User.findOne({where:{username: username}}) 
   res.render('Account/accountDetailUser', { title: 'homeUser' ,user});

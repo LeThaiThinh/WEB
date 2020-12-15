@@ -39,11 +39,10 @@ block append content
                   td=reservation.partySize
                   td=reservation.state
                   td
-                    form(action=`reserve/remove/${reservation.user.id}`, method="post")
+                    form(action=`reserve/confirm/${reservation.user.id}`, method="post")
                       button(type="submit" class="trash-btn")
                         <i class="fas fa-clipboard-check" title='Confirm' data-toggle='tooltip'></i>
                     form(action=`reserve/remove/${reservation.user.id}`, method="post")
-                  
                       button(type="submit" class="trash-btn")
                         <i class="fas fa-trash" title='Delete' data-toggle='tooltip'></i>
                       

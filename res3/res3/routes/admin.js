@@ -172,6 +172,12 @@ router.post('/reserve/datetime/:id',async function(req,res,next){
   res.redirect('/admin/reserve')
 })
 router.post('/reserve/remove/:id',async function(req,res,next){
+  await Reservation.update({state:"cancelled"},
+    {where:{userId:req.params.id}}
+  )
+  res.redirect('/admin/reserve')
+})
+router.post('/reserve/confirm/:id',async function(req,res,next){
   await Reservation.update({state:"done"},
     {where:{userId:req.params.id}}
   )

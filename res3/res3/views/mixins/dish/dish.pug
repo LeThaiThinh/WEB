@@ -5,5 +5,15 @@ mixin dish(dish)
                 img(src=`/images/dishes/${dish.image}`, alt=`/images/dishes/${dish.image}` class="dish-img")
 
         .dishInfo
-            a(class="dish-name",href=`menu/${dish.id}` )=dish.nameDish
-            p(class="dish-cost")=`${dish.cost}`
+            a(class="dish-name")=dish.nameDish
+            br
+            a(class="dish-cost")=`${dish.cost } `
+                
+                <i class="fas fa-coins"></i>
+            form(action=`${dish.id}/rate`, method="post" class="rate")
+                fieldset.ratingMenu
+                    input(type="radio" name="rating"  id="1star") 
+                    if dish.ratingAvg
+                        label(for="1star" name="rating")=`${dish.ratingAvg.substring(0,3)}`
+                    else
+                        label(for="1star" name="rating")=`0`

@@ -27,7 +27,6 @@ router.get('/menu',async function(req,res,next){
         attributes: [
           "rating",
         ],
-        group:["dishId"],
       },
     }],
     attributes: [
