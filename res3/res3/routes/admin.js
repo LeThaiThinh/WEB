@@ -135,14 +135,32 @@ router.get('/reserve',async function(req,res,next){
       order:[["id","DESC"]],
       where:{
       state:{[Op.or]:{
-        [Op.not]:"done",
-        [Op.not]:"cancel"
+        [Op.like]:"done",
+        [Op.like]:"cancel"
       }}
       }
     })
-    // var datetime=reservations[0].datetime.toString();
-    //res.json(reservations[0].user.id)
     res.render('reserve/reserveAdmin', {title:'reserve', reservations:reservations,reservationsDone:reservationsDone})
+})
+router.get('/reserve/history',async function(req,res,next){
+  const reservations=await Reservation.findAll({include:[User],
+    order:[["id","DESC"]],
+    where:{
+    state:{[Op.or]:{
+      [Op.not]:"done",
+      [Op.not]:"cancel"
+    }}
+  }})
+  const reservationsDone=await Reservation.findAll({include:[User],
+    order:[["id","DESC"]],
+    where:{
+    state:{[Op.or]:{
+      [Op.like]:"done",
+      [Op.like]:"cancel"
+    }}
+    }
+  })
+  res.render('reserve/reserveAdminHistory', {title:'reserve', reservations:reservations,reservationsDone:reservationsDone})
 })
 router.post('/reserve/datetime/:id',async function(req,res,next){
   datetime=req.body.datetime
@@ -172,7 +190,7 @@ router.get('/account/:id',async function(req,res,next){
   try{
     id=req.params.id;
     const user=await User.findOne({raw:true, where: { id:id }})
-    res.render('account/accountDetail',{title:'accountDetail',user})
+    res.render('account/accountDetailAdmin',{title:'accountDetail',user})
   }catch(error){
     next(error)
   }

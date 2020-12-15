@@ -506,7 +506,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .ratingMenu > label { 
   color: #FFD700;
   float: right;
-  font-size: 2.5em;
+  font-size: 2em;
 }
 .ratingMenu > input { display: none; } 
 .ratingMenu label:after { 
@@ -543,7 +543,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   margin: 30px 0;
 }
 .table-wrapper {
-  min-width: 500px;
+  min-width: 700px;
   background: #e8e8e8;
   padding: 20px 25px;
   border-radius: 3px;
@@ -747,7 +747,7 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   margin-bottom: 10px;
 }
 
-.formInput-reserve>input{
+.formInput-reserve>input {
   border: 0.5px solid #dadce0;
   padding: 0px;
   background-color: #1e1e1e;
@@ -757,6 +757,18 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   padding: 5px;
   padding-left: 10px;
   
+}
+.formInput-reserve> .input{
+  border: 0.5px solid #dadce0;
+  padding: 0px;
+  background-color: #1e1e1e;
+  max-width: 250px;
+  min-height: 31px;
+  margin-bottom: 10px;
+  color: white;
+  padding: 5px;
+  padding-left: 10px;
+  margin: auto;
 }
 .formInput-reserve>button {
   line-height: 15px;
@@ -791,4 +803,22 @@ input[type="datetime-local"]::-webkit-calendar-picker {
 .rate {
   display: flex;
   flex-direction: column;
+}
+.form-user >input {
+  min-width: 200px;
+}
+.trash-btn {
+  min-width: 40px;
+  min-height: 50px;
+  background-color: #00000000;
+  border: none;
+}
+.fa-trash  {
+  color: #b63030eb;
+}
+.fa-clipboard-check {
+  color: green;
+}
+.fa-coins{
+  color: yellow;
 }

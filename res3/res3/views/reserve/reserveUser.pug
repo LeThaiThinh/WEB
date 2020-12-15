@@ -6,11 +6,28 @@ block append content
     .wrap-content
         .form-check
             if pendingReservation.length!=0
-               
+                
                 form(action=`reserve/${pendingReservation[0].id}/cancel`, method="post")
-                    button(type="submit") cancel request
+                    .formInput-reserve
+                        label(for="datetime") &nbsp; Time :
+                        div.input( name="datetime" required)=pendingReservation[0].datetime
+                    .formInput-reserve
+                        label(for="partySize") Size Of Party :
+                        div.input( name="partySize" required)=pendingReservation[0].partySize
+                    .formInput-reserve
+                        label(for="status")  &nbsp; Status :
+                        div.input( name="status" required style="color: yellow;")=pendingReservation[0].state
+                    .formInput-reserve
+                        
+                        //- <button type="submit" class="btn btn-light">Confirm</button>                    
+                        button(type="submit" class="btn btn-light") cancel request
+
+            
+            
+            
+            
             else  
-                +reserveFormUser
+                +reserveFormUser                        
             .container-xl
                 .table-responsive
                     .table-wrapper
@@ -18,8 +35,8 @@ block append content
                             .row
                                 .col-sm-5
                                     h2
-                                        | Account 
-                                        b Management
+                                        | History 
+                                        b Reservation
                                 
                         table.table.table-striped.table-hover
                             thead
@@ -36,9 +53,9 @@ block append content
                                         td=reservation.partySize
                                         td=reservation.datetime
                                         td=reservation.state
-                                        td
-                                            a.settings(href=`#` title='Settings' data-toggle='tooltip')
-                                                <i class="fas fa-edit"></i>            
+                                        //- td
+                                        //-     a.settings(href=`#` title='Settings' data-toggle='tooltip')
+                                        //-         <i class="fas fa-edit"></i>            
 
 
 
