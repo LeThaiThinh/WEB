@@ -1,14 +1,85 @@
 extends ../index
 include ../mixins/reserve/reserveFormUser
 block append topbar
-    +topbarUser
+    +topbarUser(user)
 block append content
-    if pendingReservation.length!=0
-        p=`${pendingReservation[0].state}`
-        .dish-form
+    .wrap-content
+        .form-check
+            if pendingReservation.length!=0
+               
                 form(action=`reserve/${pendingReservation[0].id}/cancel`, method="post")
-                  .formInput
                     button(type="submit") cancel request
-    else  
-        +reserveFormUser
-        
+            else  
+                +reserveFormUser
+            .container-xl
+                .table-responsive
+                    .table-wrapper
+                        .table-title
+                            .row
+                                .col-sm-5
+                                    h2
+                                        | Account 
+                                        b Management
+                                
+                        table.table.table-striped.table-hover
+                            thead
+                                tr
+                                    th #
+                                    th Party Size
+                                    th(style="min-width:120px") Date and Time &nbsp;&nbsp;&nbsp;
+                                    th State
+                                    
+                            <tbody>
+                                each reservation in reservations
+                                    <tr>
+                                        th(scope="row")=reservation.id
+                                        td=reservation.partySize
+                                        td=reservation.datetime
+                                        td=reservation.state
+                                        td
+                                            a.settings(href=`#` title='Settings' data-toggle='tooltip')
+                                                <i class="fas fa-edit"></i>            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //- <table class="table table-dark">
+            //- thead
+            //-     tr
+            //-         <th scope="col">#</th>
+            //-         <th scope="co00000l">Party Size</th>
+            //-         <th scope="col">Date Time</th>
+            //-         <th scope="col">Status</th>
+            //-         th sth
+            //- <tbody>
+            //-     each reservation in reservations
+            //-         <tr>
+            //-             th(scope="row")=reservation.id
+            //-             td=reservation.partySize
+            //-             td=reservation.datetime0
+            //-             td=reservation.state
+            //-             td
+            //-                 form(action=`reserve/${pendingReservation[0].id}/cancel`, method="post")
+            //-                     button(type="submit") cancel request
+            //-         </tr>  
+            //- </tbody>
+            //- </table>               
