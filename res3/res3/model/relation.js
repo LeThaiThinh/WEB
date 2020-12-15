@@ -12,7 +12,7 @@ RatingDish.sync(
     ).then(() => {
 })
 Dish.sync(
-    // {force:true}
+    //{force:true}
      ).then(() => {
 })
 Reservation.sync(

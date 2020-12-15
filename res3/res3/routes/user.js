@@ -32,6 +32,7 @@ router.get('/:username/user/menu',async function(req,res,next){
     raw:true,
     
     })
+    console.log(dishes)
     res.render('menu/menuUser',  {title: 'menu', dishes:dishes,user:user});
   }catch(error){
     next(error)
@@ -146,8 +147,9 @@ router.get('/:username/user/menu/:id',async function(req,res,next){
     ],
     group:["dishId"],
     raw:true,
+    where:{id:id},
     })
-  console.log(ratingDish)
+  console.log(dish)
   res.render('menu/dishDetailUser',  {title: 'menu',dish:dish,user:user});
 });
 router.post('/:username/user/menu/:id/rate',async function(req,res,next){
@@ -192,7 +194,7 @@ router.post('/:username/user/reserve',async function(req,res,next){
     const username=req.params.username;
     const user=await User.findOne({where:{username: username}})  
     const reservation=req.body
-    reservation.state="await"
+    reservation.state="Pending"
     reservation.userId=user.id
     await Reservation.create(reservation)
     res.redirect(`/${req.params.username}/user/reserve`)
