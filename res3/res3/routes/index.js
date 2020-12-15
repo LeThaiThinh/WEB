@@ -1,6 +1,7 @@
 var express = require('express');
 const Op = require('sequelize').Op;
 var router = express.Router();
+const sequelize=require("../model/sequelize")
 const {Dish,Reservation,User,RatingDish}=require("../model/relation")
 const {check,validationResult}=require("express-validator")
 const {santitize, sanitize}=require("express-validator")
@@ -19,7 +20,24 @@ router.get('/', function(req, res, next) {
 // menu
 router.get('/menu',async function(req,res,next){
   Redirect(req,res,'/menu')
-  const dishes= await Dish.findAll({raw:true })
+  const dishes= await Dish.findAll({
+    include:[{
+      model:User,
+      through:{
+        attributes: [
+          "rating",
+        ],
+        group:["dishId"],
+      },
+    }],
+    attributes: [
+      "id","nameDish","description","cost","image","available",
+      [sequelize.fn('AVG', sequelize.col('users.ratingDish.rating')), 'ratingAvg']
+    ],
+    group:["dishId"],
+    raw:true,
+    
+    })
   res.render('menu/menu',  {title: 'menuUser', dishes});
 });
 router.post('/search',async function(req,res,next){ 
@@ -57,6 +75,20 @@ router.post('/search',async function(req,res,next){
   if(costOrder){
     dishes= await Dish.findAll({
       raw:true ,
+      include:[{
+        model:User,
+        through:{
+          attributes: [
+            "rating",
+          ],
+          group:["dishId"],
+        },
+      }],
+      attributes: [
+        "id","nameDish","description","cost","image","available",
+        [sequelize.fn('AVG', sequelize.col('users.ratingDish.rating')), 'ratingAvg']
+      ],
+      group:["dishId"],
       order: [['cost', costOrder]],
       where:{
         [Op.and]: [
@@ -70,7 +102,20 @@ router.post('/search',async function(req,res,next){
   if(ratingOrder){
     dishes= await Dish.findAll({
       raw:true ,
-      order: [['rating', ratingOrder]],
+      include:[{
+        model:User,
+        through:{
+          attributes: [
+            "rating",
+          ],
+        },
+      }],
+      attributes: [
+        "id","nameDish","description","cost","image","available",
+        [sequelize.fn('AVG', sequelize.col('users.ratingDish.rating')), 'ratingAvg']
+      ],
+      group:["dishId"],
+      order: [[sequelize.literal(`ratingAvg ${ratingOrder}`)]],
       where:{
         [Op.and]: [
           {'nameDish':{[Op.substring]: nameDish}},
@@ -83,8 +128,8 @@ router.post('/search',async function(req,res,next){
   res.render('menu/menu',  {title: 'menu', dishes});
 });
 router.get('/menu/:id',async function(req,res,next){
-  Redirect(req,res,`/menu/${id}`)
   const id=req.params.id;
+  Redirect(req,res,`/menu/${id}`)
   const dish=await Dish.findOne({where:{id:id}});
   res.render('menu/dishDetail',  {title: 'menu',dish});
 });

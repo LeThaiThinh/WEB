@@ -6,6 +6,10 @@ mixin dishUser(dish)
         .dishInfo
             h4(class="dish-name")=dish.nameDish
             p(class="dish-cost")=`${dish.cost}`
+            form(action=`${dish.id}/rate`, method="post" class="rate")
+                fieldset.ratingMenu
+                    input(type="radio" name="rating" value=5 id="1star") 
+                    label(for="1star" name="rating")=`${dish.ratingAvg.substring(0,3)}`
     //- .dish
     //-     .dishImage
     //-         a(href=`menu/${dish.id}`)

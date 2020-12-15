@@ -14,7 +14,16 @@ mixin searchForm(search={})
                     input(type="radio", name="available" value="true" )
                 .availability
                     label(for="available" ) unavailable&ensp;
-                    input(type="radio", name="available" value="false")   
+                    input(type="radio", name="available" value="false") 
+            if search.order==null
+                .formInput
+                    select(name="order" class="order")
+                        optgroup(label="order by cost")
+                            option(value="increaseCost") increase cost
+                            option(value="decreaseCost" ) decrease cost
+                        optgroup(label="order by rating")    
+                            option(value="increaseRating") increase rating
+                            option(value="decreaseRating") decrease rating                                         
             if search.order=="increaseCost"
                 .formInput
                     select(name="order" class="order")
@@ -50,6 +59,7 @@ mixin searchForm(search={})
                             option(value="decreaseCost" ) decrease cost
                         optgroup(label="order by rating")    
                             option(value="increaseRating") increase rating
-                            option(value="decreaseRating" selected) decrease rating                                          
+                            option(value="decreaseRating" selected) decrease rating    
+                      
             .formInput
                 button(type="submit" class="form-button" ) Confirm

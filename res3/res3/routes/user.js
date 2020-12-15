@@ -15,13 +15,23 @@ router.get('/:username/user/menu',async function(req,res,next){
   try{
     const username=req.params.username;
     const user=await User.findOne({where:{username: username}}) 
-    const dishes= await Dish.findAll({raw:true})
-    const ratingDish= await RatingDish.findAll({
-      attributes: ["dishId",
-       [sequelize.fn('sum', sequelize.col('rating')), 'ratingAvg']
+    const dishes= await Dish.findAll({
+    include:[{
+      model:User,
+      through:{
+        attributes: [
+          "rating",
+        ],
+      },
+    }],
+    attributes: [
+      "id","nameDish","description","cost","image","available",
+      [sequelize.fn('AVG', sequelize.col('users.ratingDish.rating')), 'ratingAvg']
     ],
-  })
-    console.log(ratingDish )
+    group:["dishId"],
+    raw:true,
+    
+    })
     res.render('menu/menuUser',  {title: 'menu', dishes:dishes,user:user});
   }catch(error){
     next(error)
@@ -62,6 +72,20 @@ router.post('/:username/user/search',async function(req,res,next){
   if(costOrder){
     dishes= await Dish.findAll({
       raw:true ,
+      include:[{
+        model:User,
+        through:{
+          attributes: [
+            "rating",
+          ],
+          group:["dishId"],
+        },
+      }],
+      attributes: [
+        "id","nameDish","description","cost","image","available",
+        [sequelize.fn('AVG', sequelize.col('users.ratingDish.rating')), 'ratingAvg']
+      ],
+      group:["dishId"],
       order: [['cost', costOrder]],
       where:{
         [Op.and]: [
@@ -75,7 +99,20 @@ router.post('/:username/user/search',async function(req,res,next){
   if(ratingOrder){
     dishes= await Dish.findAll({
       raw:true ,
-      order: [['rating', ratingOrder]],
+      include:[{
+        model:User,
+        through:{
+          attributes: [
+            "rating",
+          ],
+        },
+      }],
+      attributes: [
+        "id","nameDish","description","cost","image","available",
+        [sequelize.fn('AVG', sequelize.col('users.ratingDish.rating')), 'ratingAvg']
+      ],
+      group:["dishId"],
+      order: [[sequelize.literal(`ratingAvg ${ratingOrder}`)]],
       where:{
         [Op.and]: [
           {'nameDish':{[Op.substring]: nameDish}},
@@ -87,17 +124,28 @@ router.post('/:username/user/search',async function(req,res,next){
   }
   const username=req.params.username;
   const user=await User.findOne({where:{username: username}}) 
-  res.render('menu/menu',  {title: 'menu', dishes:dishes,user:user});
+  res.render('menu/menuUser',  {title: 'menu', dishes:dishes,user:user,search:req.body});
 });
 router.get('/:username/user/menu/:id',async function(req,res,next){
   const id=req.params.id;
-  const dish=await Dish.findOne({where:{id:id}});
   const username=req.params.username;
   const user=await User.findOne({where:{username: username}}) 
-  const ratingDish=await RatingDish.findOne({
-    where:{
-      [Op.and]:{ dishId:id,userId:user.id}
-      }
+  const dish=await Dish.findOne({
+    include:[{
+      model:User,
+      through:{
+        attributes: [
+          "rating",
+        ],
+        group:["dishId"],
+      },
+    }],
+    attributes: [
+      "id","nameDish","description","cost","image","available",
+      [sequelize.fn('AVG', sequelize.col('users.ratingDish.rating')), 'ratingAvg']
+    ],
+    group:["dishId"],
+    raw:true,
     })
   console.log(ratingDish)
   res.render('menu/dishDetailUser',  {title: 'menu',dish:dish,user:user});

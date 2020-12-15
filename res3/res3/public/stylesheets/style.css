@@ -481,7 +481,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .rating > label:before { 
   margin: 3px;
   margin-top: 0;
-  font-size: 1.5em;
+  font-size: 1em;
   font-family: FontAwesome;
   display: inline-block;
   content: "\f005";
@@ -506,7 +506,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .ratingMenu > label { 
   color: #FFD700;
   float: right;
-  font-size: 3em;
+  font-size: 2.5em;
 }
 .ratingMenu > input { display: none; } 
 .ratingMenu label:after { 
