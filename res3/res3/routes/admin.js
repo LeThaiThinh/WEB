@@ -128,7 +128,7 @@ router.get('/reserve',async function(req,res,next){
       where:{
       state:{[Op.or]:{
         [Op.not]:"done",
-        [Op.not]:"cancel"
+        [Op.not]:"cancelled"
       }}
     }})
     const reservationsDone=await Reservation.findAll({include:[User],
@@ -136,7 +136,7 @@ router.get('/reserve',async function(req,res,next){
       where:{
       state:{[Op.or]:{
         [Op.like]:"done",
-        [Op.like]:"cancel"
+        [Op.like]:"cancelled"
       }}
       }
     })
@@ -148,7 +148,7 @@ router.get('/reserve/history',async function(req,res,next){
     where:{
     state:{[Op.or]:{
       [Op.not]:"done",
-      [Op.not]:"cancel"
+      [Op.not]:"cancelled"
     }}
   }})
   const reservationsDone=await Reservation.findAll({include:[User],
@@ -156,7 +156,7 @@ router.get('/reserve/history',async function(req,res,next){
     where:{
     state:{[Op.or]:{
       [Op.like]:"done",
-      [Op.like]:"cancel"
+      [Op.like]:"cancelled"
     }}
     }
   })
