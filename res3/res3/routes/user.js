@@ -146,6 +146,7 @@ router.get('/:username/user/menu/:id',async function(req,res,next){
     ],
     group:["dishId"],
     raw:true,
+    where:{id:id}
     })
   console.log(ratingDish)
   res.render('menu/dishDetailUser',  {title: 'menu',dish:dish,user:user});

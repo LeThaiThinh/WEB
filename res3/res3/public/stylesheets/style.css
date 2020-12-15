@@ -501,7 +501,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   float: right;
   color: white;
   text-align: center;
-  margin-right: 20%;
+  margin-right: 10%;
 }
 .ratingMenu > label { 
   color: #FFD700;
