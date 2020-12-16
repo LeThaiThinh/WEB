@@ -145,7 +145,7 @@ router.get('/reserve/history',async function(req,res,next){
 router.post('/reserve/edit/:id',async function(req,res,next){
   datetime=req.body.datetime
   partySize=req.body.partySize
-  if(req.body.partySize!=""){
+  if(partySize!=""){
     await Reservation.update({partySize:partySize},
       {where:{id:req.params.id}}
     )
@@ -156,6 +156,7 @@ router.post('/reserve/edit/:id',async function(req,res,next){
       {where:{id:req.params.id}}
     )
   }
+  console.log(req.body)
   res.redirect('/admin/reserve')
 })
 router.post('/reserve/remove/:id',async function(req,res,next){

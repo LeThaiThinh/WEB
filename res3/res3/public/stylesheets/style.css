@@ -540,10 +540,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 /* test */
 .table-responsive {
-  margin: 30px 0;
+  margin-top: 30px;
+  margin-bottom: 10px;
 }
 .table-wrapper {
-  min-width: 700px;
+  min-width: 500px;
   background: #e8e8e8;
   padding: 20px 25px;
   border-radius: 3px;
@@ -821,4 +822,14 @@ input[type="datetime-local"]::-webkit-calendar-picker {
 }
 .fa-coins{
   color: yellow;
+}
+.datetime-input {
+  background-color: #d2691e00;
+  border: 1px solid;
+  
+}
+.partysize-input {
+  max-width: 70px;
+  background-color: #d2691e00;
+  border: 1px solid;
 }

@@ -37,7 +37,7 @@ router.get('/menu',async function(req,res,next){
     raw:true,
     
     })
-  res.render('menu/menu',  {title: 'menuUser', dishes});
+  res.render('menu/menu',  {title: 'menu', dishes});
 });
 router.post('/search',async function(req,res,next){ 
   var costOrder="";
