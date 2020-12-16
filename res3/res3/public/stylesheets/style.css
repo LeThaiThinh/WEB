@@ -786,6 +786,7 @@ input[type="datetime-local"]::-webkit-calendar-picker {
 .form-check {
   margin-top: 50px;
   color: white;
+  padding-left:0em
 }
 /* .form-box-reservation {
   min-width: 300px;
@@ -814,6 +815,17 @@ input[type="datetime-local"]::-webkit-calendar-picker {
   background-color: #00000000;
   border: none;
 }
+.reserve-edit-btn{
+  min-width: 22px;
+  min-height: 19px;
+  background-color: #00000000;
+  border: none;
+  position: absolute;
+  top: 30px;
+  left: 0px;
+  height: 5px;
+  padding: 0em;
+}
 .fa-trash  {
   color: #b63030eb;
 }
@@ -832,4 +844,24 @@ input[type="datetime-local"]::-webkit-calendar-picker {
   max-width: 70px;
   background-color: #d2691e00;
   border: 1px solid;
+}
+a:hover {
+  color: #0056b3;
+  text-decoration:none!important;
+
+}
+.topbar-text:hover {
+  color: #949698!important;
+  transition: ease-in-out 0.3s;
+}
+.fa-backspace {
+  font-size: 30px;
+}
+table.table td a {
+  font-weight: normal;
+  color: black!important;
+}
+table.table td a:hover {
+  color: #949698!important;
+  transition: ease-in-out 0.3s;
 }

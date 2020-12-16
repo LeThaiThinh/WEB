@@ -5,9 +5,9 @@ mixin dish(dish)
                 img(src=`/images/dishes/${dish.image}`, alt=`/images/dishes/${dish.image}` class="dish-img")
 
         .dishInfo
-            a(class="dish-name")=dish.nameDish
+            a(href=`menu/${dish.id}` class="dish-name")=dish.nameDish
             br
-            a(class="dish-cost")=`${dish.cost } `
+            a(href=`menu/${dish.id}` class="dish-cost")=`${dish.cost } `
                 
                 <i class="fas fa-coins"></i>
             form(action=`${dish.id}/rate`, method="post" class="rate")

@@ -171,6 +171,28 @@ router.post('/reserve/confirm/:id',async function(req,res,next){
   )
   res.redirect('/admin/reserve')
 })
+router.get('/reserve/:username',async function(req,res,next){
+  try{
+    const username=req.params.username;
+  const user=await User.findOne({where:{username: username}})
+  const pendingReservation=await user.getReservations({
+    where:{
+      state:"Pending"
+  }})
+  const reservations=await user.getReservations({
+    where:{
+      state:{
+        [Op.or]:[
+          { [Op.like]:"done"},
+          { [Op.like]:"cancelled"},
+        ]}
+  }})
+  // res.json(reservation)
+  res.render('reserve/reserveDetailAdmin', {title:'reserve',pendingReservation:pendingReservation,user:user,reservations:reservations})
+  }catch(err){
+    console.log(err);
+  }
+})
 //account
 router.get('/account',async function(req,res,next){
   try{

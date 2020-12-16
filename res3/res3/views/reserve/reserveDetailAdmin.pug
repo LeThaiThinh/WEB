@@ -1,0 +1,99 @@
+extends ../index
+include ../mixins/reserve/reserveFormUser
+block append topbar
+    +topbarAdmin
+block append content
+    .wrap-content
+
+        .form-check
+            a(href=`/admin/reserve`)
+                <i class="fas fa-backspace"></i>
+            if pendingReservation.length!=0
+                form(action=`reserve/${pendingReservation[0].id}/cancel`, method="post")
+                    .formInput-reserve
+                        label(for="datetime") &nbsp; Time :
+                        div.input( name="datetime" required)=pendingReservation[0].datetime
+                    .formInput-reserve
+                        label(for="partySize") Size Of Party :
+                        div.input( name="partySize" required)=pendingReservation[0].partySize
+                    .formInput-reserve
+                        label(for="status")  &nbsp; Status :
+                        div.input( name="status" required style="color: yellow;")=pendingReservation[0].state
+                    .formInput-reserve
+                        
+                        //- <button type="submit" class="btn btn-light">Confirm</button>                    
+                        button(type="submit" class="btn btn-light") cancel request           
+            else
+                +reserveFormUser                        
+            .container-xl
+                .table-responsive
+                    .table-wrapper
+                        .table-title
+                            .row
+                                .col-sm-5
+                                    h2
+                                        | History 
+                                        b Reservation
+                                
+                        table.table.table-striped.table-hover
+                            thead
+                                tr
+                                    th #
+                                    th Party Size
+                                    th(style="min-width:120px") Date and Time &nbsp;&nbsp;&nbsp;
+                                    th State
+                                    
+                            <tbody>
+                                each reservation in reservations
+                                    <tr>
+                                        th(scope="row")=reservation.id
+                                        td=reservation.partySize
+                                        td=reservation.datetime
+                                        td=reservation.state
+                                        //- td
+                                        //-     a.settings(href=`#` title='Settings' data-toggle='tooltip')
+                                        //-         <i class="fas fa-edit"></i>            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //- <table class="table table-dark">
+            //- thead
+            //-     tr
+            //-         <th scope="col">#</th>
+            //-         <th scope="co00000l">Party Size</th>
+            //-         <th scope="col">Date Time</th>
+            //-         <th scope="col">Status</th>
+            //-         th sth
+            //- <tbody>
+            //-     each reservation in reservations
+            //-         <tr>
+            //-             th(scope="row")=reservation.id
+            //-             td=reservation.partySize
+            //-             td=reservation.datetime0
+            //-             td=reservation.state
+            //-             td
+            //-                 form(action=`reserve/${pendingReservation[0].id}/cancel`, method="post")
+            //-                     button(type="submit") cancel request
+            //-         </tr>  
+            //- </tbody>
+            //- </table>               
