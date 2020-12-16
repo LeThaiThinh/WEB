@@ -181,12 +181,7 @@ router.get('/:username/user/reserve',async function(req,res,next){
   const user=await User.findOne({where:{username: username}})
   const pendingReservation=await user.getReservations({
     where:{
-      state:{
-        [Op.and]:{
-          [Op.not]:"done",
-          [Op.not]:"cancelled",
-          }
-        }
+      state:"Pending"
   }})
   const reservations=await user.getReservations({
     where:{

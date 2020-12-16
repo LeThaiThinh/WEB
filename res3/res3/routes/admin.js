@@ -126,60 +126,47 @@ router.get('/reserve',async function(req,res,next){
     const reservations=await Reservation.findAll({include:[User],
       order:[["id","DESC"]],
       where:{
-      state:{[Op.or]:{
-        [Op.not]:"done",
-        [Op.not]:"cancelled"
-      }}
+      state:"Pending"
     }})
-    const reservationsDone=await Reservation.findAll({include:[User],
-      order:[["id","DESC"]],
-      where:{
-      state:{[Op.or]:{
-        [Op.like]:"done",
-        [Op.like]:"cancelled"
-      }}
-      }
-    })
-    res.render('reserve/reserveAdmin', {title:'reserve', reservations:reservations,reservationsDone:reservationsDone})
+    res.render('reserve/reserveAdmin', {title:'reserve', reservations:reservations})
 })
 router.get('/reserve/history',async function(req,res,next){
-  const reservations=await Reservation.findAll({include:[User],
-    order:[["id","DESC"]],
-    where:{
-    state:{[Op.or]:{
-      [Op.not]:"done",
-      [Op.not]:"cancelled"
-    }}
-  }})
   const reservationsDone=await Reservation.findAll({include:[User],
     order:[["id","DESC"]],
     where:{
-    state:{[Op.or]:{
-      [Op.like]:"done",
-      [Op.like]:"cancelled"
-    }}
+    state:{[Op.or]:[
+      {[Op.like]:"done"},
+      {[Op.like]:"cancelled"},
+    ]}
     }
   })
-  res.render('reserve/reserveAdminHistory', {title:'reserve', reservations:reservations,reservationsDone:reservationsDone})
+  res.render('reserve/reserveAdminHistory', {title:'reserve', reservationsDone:reservationsDone})
 })
-router.post('/reserve/datetime/:id',async function(req,res,next){
+router.post('/reserve/edit/:id',async function(req,res,next){
   datetime=req.body.datetime
+  partySize=req.body.partySize
+  if(req.body.partySize!=""){
+    await Reservation.update({partySize:partySize},
+      {where:{id:req.params.id}}
+    )
+  }
+    
   if(datetime!=""){
     await Reservation.update({datetime:datetime},
-      {where:{userId:req.params.id}}
+      {where:{id:req.params.id}}
     )
   }
   res.redirect('/admin/reserve')
 })
 router.post('/reserve/remove/:id',async function(req,res,next){
   await Reservation.update({state:"cancelled"},
-    {where:{userId:req.params.id}}
+    {where:{id:req.params.id}}
   )
   res.redirect('/admin/reserve')
 })
 router.post('/reserve/confirm/:id',async function(req,res,next){
   await Reservation.update({state:"done"},
-    {where:{userId:req.params.id}}
+    {where:{id:req.params.id}}
   )
   res.redirect('/admin/reserve')
 })

@@ -8,19 +8,19 @@ User.hasMany(Reservation)
 Reservation.belongsTo(User)
 Dish.belongsToMany(User,{through:RatingDish})
 RatingDish.sync(
-    //{force:true}
+    // {force:true}
     ).then(() => {
 })
 Dish.sync(
-    //{force:true}
+    // {force:true}
      ).then(() => {
 })
 Reservation.sync(
-    //{force:true}
+    // {force:true}
     ).then(()=>{
 })
 User.sync(
-    //{ force:true}
+    // { force:true}
     ).then(() => {
 });
 module.exports={Dish:Dish,Reservation:Reservation,User:User,RatingDish:RatingDish}
