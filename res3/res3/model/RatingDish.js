@@ -5,4 +5,5 @@ const RatingDish=sequelize.define('ratingDish',{
         type:Sequelize.INTEGER,
     },
 })
+
 module.exports=RatingDish;

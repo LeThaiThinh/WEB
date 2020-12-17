@@ -2,7 +2,7 @@ var express = require('express');
 const Op = require('sequelize').Op;
 var router = express.Router();
 const sequelize=require("../model/sequelize")
-const {Dish,Reservation,User,RatingDish}=require("../model/relation")
+const {Dish,Reservation,User,RatingDish,Menu}=require("../model/relation")
 const {check,validationResult}=require("express-validator")
 const {santitize, sanitize}=require("express-validator")
 function Redirect(req,res,params){
@@ -33,11 +33,11 @@ router.get('/menu',async function(req,res,next){
       "id","nameDish","description","cost","image","available",
       [sequelize.fn('AVG', sequelize.col('users.ratingDish.rating')), 'ratingAvg']
     ],
-    group:["dishId"],
+    group:["id"],
     raw:true,
     
     })
-  res.render('menu/menu',  {title: 'menu', dishes});
+  res.render('menu/menu',  {title: 'menu', dishes:dishes});
 });
 router.post('/search',async function(req,res,next){ 
   var costOrder="";
@@ -144,8 +144,8 @@ router.post('/signup',
   sanitize('*').trim().escape(),
   ],
   async function(req, res, next){
-    username=req.body.username
-    password=req.body.password
+    const username=req.body.username
+    const password=req.body.password
     const errors=validationResult(req);
     if(!errors.isEmpty()){
       res.render('account/signup',{title:"pls fix these error",errors:errors.array()})
@@ -159,7 +159,10 @@ router.post('/signup',
       user=req.body;
       User.create(user);
       req.session.login=username;
-      Redirect(req,res,'')
+      if(username=="Admin")
+        res.redirect("/admin")
+      else
+        Redirect(req,res,'')
     }
   }
 });
@@ -168,9 +171,9 @@ router.get('/login',function(req,res,next){
   res.render('account/login',{title:'Login to continue'});
 })
 router.post('/login',async (req,res,next)=>{
-  username=req.body.username;
-  password=req.body.password;
-  user=await User.findOne({where:{username:username}});
+  const username=req.body.username;
+  const password=req.body.password;
+  const user=await User.findOne({where:{username:username}});
   if(!user){
     res.render('account/login', {title:'wrong username'})
   }else if(user.password!=password){
@@ -178,7 +181,10 @@ router.post('/login',async (req,res,next)=>{
   }else {
     req.session.login=username;
     login=username;
-    Redirect(req,res,'')
+    if(username=="Admin")
+      res.redirect('/admin')
+    else
+      Redirect(req,res,'')
   }
 });
 //logout

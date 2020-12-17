@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const Op = require('sequelize').Op;
 const sequelize=require("../model/sequelize")
-const {Dish,Reservation,User,RatingDish}=require("../model/relation")
+const {Dish,Reservation,User,RatingDish,Menu}=require("../model/relation")
 var app = express();
 function Redirect(req,res){
   if(!req.session.login){

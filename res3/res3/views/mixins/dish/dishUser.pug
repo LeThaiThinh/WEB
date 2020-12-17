@@ -6,8 +6,7 @@ mixin dishUser(dish)
         .dishInfo
             a(href=`menu/${dish.id}` class="dish-name")=dish.nameDish
             br
-            a(class="dish-cost" href=`menu/${dish.id}`)=`${dish.cost } `
-                
+            a(href=`menu/${dish.id}` class="dish-cost")=`${dish.cost } `
                 <i class="fas fa-coins"></i>
             form(action=`${dish.id}/rate`, method="post" class="rate")
                 fieldset.ratingMenu

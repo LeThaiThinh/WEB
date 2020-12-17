@@ -3,24 +3,35 @@ const Dish = require("./dish");
 const RatingDish = require('./RatingDish');
 const Reservation = require("./reservation");
 const User = require("./user");
+const Menu = require("./menu");
 
 User.hasMany(Reservation)
 Reservation.belongsTo(User)
-Dish.belongsToMany(User,{through:RatingDish})
+Menu.hasMany(Dish)
+Dish.belongsTo(Menu)
+User.belongsToMany(Dish,{through:RatingDish})
+
+
 RatingDish.sync(
-    // {force:true}
+    //  {force:true}
     ).then(() => {
 })
 Dish.sync(
-    // {force:true}
+    //  {force:true}
      ).then(() => {
 })
+Menu.sync(
+    // { force:true}
+   ).then(() => {
+});
 Reservation.sync(
-    // {force:true}
+    //  {force:true}
     ).then(()=>{
 })
 User.sync(
-    // { force:true}
+    //  { force:true}
     ).then(() => {
-});
-module.exports={Dish:Dish,Reservation:Reservation,User:User,RatingDish:RatingDish}
+})
+
+
+module.exports={Dish:Dish,Reservation:Reservation,User:User,RatingDish:RatingDish,Menu:Menu}

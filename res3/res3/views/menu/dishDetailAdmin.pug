@@ -13,16 +13,3 @@ block append content
         .menu
             +dishDetailAdmin(dish)
             
-            form(action=`${dish.id}/rate`, method="post" class="rate")
-                fieldset.rating
-                    input(type="radio" name="rating" value=5 id="1star") 
-                    label(for="1star" name="rating")
-                    input(type="radio" name="rating" value=4 id="2star")
-                    label(for="2star" name="rating")
-                    input(type="radio" name="rating" value=3 id="3star")
-                    label(for="3star" name="rating")
-                    input(type="radio" name="rating" value=2 id="4star")
-                    label(for="4star" name="rating")
-                    input(type="radio" name="rating" value=1 id="5star") 
-                    label(for="5star" name="rating")
-                button(type="submit") Bạn đánh giá món ăn này

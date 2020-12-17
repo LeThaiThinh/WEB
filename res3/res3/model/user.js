@@ -19,5 +19,9 @@ const User=sequelize.define('users',{
     }    
 })
 
+// User.sync(
+//    // { force:true}
+//    ).then(() => {
+// });
 
 module.exports=User

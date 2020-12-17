@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const Op = require('sequelize').Op;
-const {Dish,Reservation,User,RatingDish}=require("../model/relation")
+const {Dish,Reservation,User,RatingDish,Menu}=require("../model/relation")
 /*ADMIN*/
 // home
 router.get('/',function(req,res,next){
@@ -15,6 +15,7 @@ router.get('/',function(req,res,next){
 router.get('/menu',async function(req,res,next){
     try{
     const dishes=await Dish.findAll({raw:true});
+    // console.log(dishes)
     res.render('menu/menuAdmin',  {title: 'menuAdmin',dishes});
     }catch(error){
         next(error);

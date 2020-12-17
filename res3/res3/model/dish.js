@@ -26,6 +26,13 @@ const Dish=sequelize.define('dishes',{
         type:Sequelize.BOOLEAN,
         allowNull:false,
     },
+    // menuId: {
+    //     type: Sequelize.INTEGER,
+    //     references:{
+    //         model:'menus', // <<< Note, its table's name, not object name
+    //         key: 'id' // <<< Note, its a column name
+    //     }
+//   }
 })
 
 
