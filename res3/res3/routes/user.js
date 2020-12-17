@@ -73,10 +73,10 @@ router.post('/:username/user/search',async function(req,res,next){
   }
   if(req.body.costMax){
     costMax=req.body.costMax
-  }
+  }else costMax=100000
   if(req.body.costMin){
     costMin=req.body.costMin
-  }
+  }else costMin=0
   var dishes
   if(costOrder){
     dishes= await Dish.findAll({

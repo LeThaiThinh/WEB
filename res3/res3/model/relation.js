@@ -10,7 +10,7 @@ Reservation.belongsTo(User)
 Menu.hasMany(Dish)
 Dish.belongsTo(Menu)
 User.belongsToMany(Dish,{through:RatingDish})
-
+Dish.belongsToMany(User,{through:RatingDish})
 
 RatingDish.sync(
     //  {force:true}
