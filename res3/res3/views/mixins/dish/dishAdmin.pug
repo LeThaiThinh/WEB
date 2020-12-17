@@ -1,7 +1,7 @@
 mixin dishAdmin(dish)
     .dish
         .dishImage
-            a(href=`/admin/menu/${dish.id}`)
+            a()
                 img(src=`/images/dishes/${dish.image}`, alt=`/images/dishes/${dish.image}` class="dish-img")
                 a(href=`/admin/menu/${dish.id}/edit` ) 
                     button(type="submit" class="edit-button") Edit 

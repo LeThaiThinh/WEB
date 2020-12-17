@@ -182,7 +182,7 @@ router.post('/login',async (req,res,next)=>{
     req.session.login=username;
     login=username;
     if(username=="Admin")
-      res.redirect('/admin')
+        res.redirect("/admin")
     else
       Redirect(req,res,'')
   }

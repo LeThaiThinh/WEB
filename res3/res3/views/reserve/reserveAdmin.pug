@@ -2,6 +2,12 @@ extends ../index
 include ../mixins/reserve/reserveFormAdmin
 block append topbar
     +topbarAdmin
+block append sidebar-text
+    .edit-text
+        p THIS IS OUR LOGIN PAGE!
+        br
+        p
+        | I&apos;m a paragraph. Click here to add your own text and edit me. It&rsquo;s easy. Just click &ldquo;Edit Text&rdquo; or double click me to add your own content and make changes to the font.    
 block append content
   .wrap-content(style="min-width:850px")
     

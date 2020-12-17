@@ -35,7 +35,7 @@ router.get('/:username/user/menu',async function(req,res,next){
       "id","nameDish","description","cost","image","available",
       [sequelize.fn('AVG', sequelize.col('users.ratingDish.rating')), 'ratingAvg']
     ],
-    group:["dishId"],
+    group:["Id"],
     raw:true,
     
     })
@@ -169,9 +169,21 @@ router.post('/:username/user/menu/:id/rate',async function(req,res,next){
   }
   var ratingDish=req.body
   const user=await User.findOne({where:{username: req.params.username}})
-  ratingDish.dishId=req.params.id
-  ratingDish.userId=user.id
-  await RatingDish.create(ratingDish);
+   ratingDish.dishId=req.params.id
+   ratingDish.userId=user.id
+  const ratingDish2=await RatingDish.findOne({where:
+    {[Op.and]:[{dishId:ratingDish.dishId},{userId:ratingDish.userId}]}
+    
+  })
+  if(ratingDish2==null){
+    await RatingDish.create(ratingDish);
+  }
+  else {
+    await RatingDish.update({rating:ratingDish.rating},{
+    where:{[Op.and]:[{dishId:ratingDish.dishId},{userId:ratingDish.userId}]}
+  });
+
+  }
   res.redirect(`/${username}/user/menu/${req.params.id}`)
 });
 //reservation

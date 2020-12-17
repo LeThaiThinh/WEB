@@ -1,29 +1,37 @@
 extends ../index
 block append topbar
     +topbarAdmin
+block append sidebar-text
+    .edit-text
+        p THIS IS OUR LOGIN PAGE!
+        br
+        p
+        | I&apos;m a paragraph. Click here to add your own text and edit me. It&rsquo;s easy. Just click &ldquo;Edit Text&rdquo; or double click me to add your own content and make changes to the font.    
     
 block append content
   .wrap-content
-    .wrap-account      
-          form(action=`${user.id}/username`, method="post")
-            .form-user 
-              label(for="username") Username:
-              input(type="text", name="username" value=`${user.username}`)
-              //- button(type="submit") edit
-              button(type="submit" class="btn btn-secondary admin-btn" style="font-size:12px;margin-bottom: 5px") edit
+    #wrap-all-account
+      .wrap-account      
+            form(action=`${user.id}/username`, method="post")
+              <i class="fas fa-user"></i>
+              .form-user 
+                label(for="username") Username:
+                input(type="text", name="username" value=`${user.username}`)
+                //- button(type="submit") edit
+                button(type="submit" class="btn btn-secondary admin-btn" style="font-size:12px;margin-bottom: 5px") edit
 
-          form(action=`${user.id}/dateOfBirth`, method="post")
-            .form-user  
-              label(for="dateOfBirth") DateOfBirth:
-              input(type="date", name="dateOfBirth" value=`${user.dateOfBirth}`)
-              button(type="submit" class="btn btn-secondary admin-btn" style="font-size: 12px;margin-bottom: 5px;") edit
+            form(action=`${user.id}/dateOfBirth`, method="post")
+              .form-user  
+                label(for="dateOfBirth") DateOfBirth:
+                input(type="date", name="dateOfBirth" value=`${user.dateOfBirth}`)
+                button(type="submit" class="btn btn-secondary admin-btn" style="font-size: 12px;margin-bottom: 5px;") edit
 
-          form(action=`${user.id}/phone`, method="post")
-            .form-user
-              label(for="phone") Phone:
-              input(type="tel", name="phone" value=`${user.phone}`)
-              button(type="submit" class="btn btn-secondary admin-btn" style="font-size: 12px;margin-bottom: 5px") edit
+            form(action=`${user.id}/phone`, method="post")
+              .form-user
+                label(for="phone") Phone:
+                input(type="tel", name="phone" value=`${user.phone}`)
+                button(type="submit" class="btn btn-secondary admin-btn" style="font-size: 12px;margin-bottom: 5px") edit
 
-          form(action=`${user.id}/remove`, method="post")
-            .form-user
-              button(type="submit" class="btn btn-info" ) remove account
+            form(action=`${user.id}/remove`, method="post")
+              .form-user
+                button(type="submit" class="btn btn-info" ) remove account
