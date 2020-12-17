@@ -124,7 +124,7 @@ router.post('/menu/:id/edit',async function(req,res,next){
 });
 //reserve
 router.get('/reserve',async function(req,res,next){
-  const users=User.findAll({
+  const users=await User.findAll({
     include:[{
       model:Reservation,
       order:[["id","DESC"]],
@@ -218,11 +218,11 @@ router.post('/account/search',async function(req,res,next){
   const search=req.body
   console.log(search.username)
   try{
-    const users=User.findAll({
+    const users=await User.findAll({
       where:{
         [Op.and]: [
           {'username':{[Op.substring]: search.username}},
-          // {'phone':{[Op.substring]: search.phone}},
+           {'phone':{[Op.substring]: search.phone}},
         ] 
       }
     })

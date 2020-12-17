@@ -66,10 +66,10 @@ router.post('/search',async function(req,res,next){
   }
   if(req.body.costMax){
     costMax=req.body.costMax
-  }
+  }else costMax=1000000
   if(req.body.costMin){
     costMin=req.body.costMin
-  }
+  }else costMin=0
   var dishes
   if(costOrder){
     dishes= await Dish.findAll({
@@ -80,14 +80,14 @@ router.post('/search',async function(req,res,next){
           attributes: [
             "rating",
           ],
-          group:["dishId"],
+          group:["id"],
         },
       }],
       attributes: [
         "id","nameDish","description","cost","image","available",
         [sequelize.fn('AVG', sequelize.col('users.ratingDish.rating')), 'ratingAvg']
       ],
-      group:["dishId"],
+      group:["id"],
       order: [['cost', costOrder]],
       where:{
         [Op.and]: [
