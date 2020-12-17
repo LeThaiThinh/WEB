@@ -4,26 +4,19 @@ block append topbar
     +topbarUser   
 block append sidebar-text
             .edit-text
-                p THIS IS OUR MENU!
+                p THIS IS OUR DISH!
                 br
                 p
                 | I&apos;m a paragraph. Click here to add your own text and edit me. It&rsquo;s easy. Just click &ldquo;Edit Text&rdquo; or double click me to add your own content and make changes to the font.
+                br
+                br
+                br
+                br
+                p=dish.description
 block append content
     .wrap-content
-        .menu
+        .menu(style="grid-template-columns: 100%!important;")
             +dishDetailUser(dish)
             
-            form(action=`${dish.id}/rate`, method="post" class="rate")
-                fieldset.rating
-                    input(type="radio" name="rating" value=5 id="1star") 
-                    label(for="1star" name="rating")
-                    input(type="radio" name="rating" value=4 id="2star")
-                    label(for="2star" name="rating")
-                    input(type="radio" name="rating" value=3 id="3star")
-                    label(for="3star" name="rating")
-                    input(type="radio" name="rating" value=2 id="4star")
-                    label(for="4star" name="rating")
-                    input(type="radio" name="rating" value=1 id="5star") 
-                    label(for="5star" name="rating")
-                button(type="submit") Bạn đánh giá món ăn này
-                    
+                
+                        

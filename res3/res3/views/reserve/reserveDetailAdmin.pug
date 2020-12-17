@@ -9,20 +9,21 @@ block append content
             a(href=`/admin/reserve`)
                 <i class="fas fa-backspace"></i>
             if pendingReservation.length!=0
-                form(action=`reserve/${pendingReservation[0].id}/cancel`, method="post")
-                    .formInput-reserve
-                        label(for="datetime") &nbsp; Time :
-                        div.input( name="datetime" required)=pendingReservation[0].datetime
-                    .formInput-reserve
-                        label(for="partySize") Size Of Party :
-                        div.input( name="partySize" required)=pendingReservation[0].partySize
-                    .formInput-reserve
-                        label(for="status")  &nbsp; Status :
-                        div.input( name="status" required style="color: yellow;")=pendingReservation[0].state
-                    .formInput-reserve
-                        
-                        //- <button type="submit" class="btn btn-light">Confirm</button>                    
-                        button(type="submit" class="btn btn-light") cancel request           
+                .form-reserve
+                    form(action=`reserve/${pendingReservation[0].id}/cancel`, method="post")
+                        .formInput-reserve
+                            label(for="datetime") &nbsp; Time :
+                            div.input( name="datetime" required)=`${pendingReservation[0].datetime.toString().substring(16,24)}  ${pendingReservation[0].datetime.toString().substring(8,10)} ${pendingReservation[0].datetime.toString().substring(3,7)} ${pendingReservation[0].datetime.toString().substring(11,16) }`
+                        .formInput-reserve
+                            label(for="partySize") Size Of Party :
+                            div.input( name="partySize" required)=pendingReservation[0].partySize
+                        .formInput-reserve
+                            label(for="status")  &nbsp; Status :
+                            div.input( name="status" required style="color: yellow;")=pendingReservation[0].state
+                        .formInput-reserve
+                            
+                            //- <button type="submit" class="btn btn-light">Confirm</button>                    
+                            button(type="submit" class="btn btn-light") cancel request           
             else
                 +reserveFormUser                        
             .container-xl

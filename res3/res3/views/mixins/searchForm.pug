@@ -1,5 +1,5 @@
 mixin searchForm(search={})
-    .dish-form
+    .dish-form(style="margin-bottom:50px!important")
         form(action="search", method="post" class="dish-form-1" autocomplete)
             .formInput
                 input(type="text", name="nameDish" class="text-box" placeholder="Dish name" value=search.nameDish)

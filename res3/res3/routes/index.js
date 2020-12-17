@@ -33,7 +33,7 @@ router.get('/menu',async function(req,res,next){
       "id","nameDish","description","cost","image","available",
       [sequelize.fn('AVG', sequelize.col('users.ratingDish.rating')), 'ratingAvg']
     ],
-    group:["dishId"],
+    group:["id"],
     raw:true,
     
     })
@@ -159,7 +159,10 @@ router.post('/signup',
       user=req.body;
       User.create(user);
       req.session.login=username;
-      Redirect(req,res,'')
+      if(username=="Admin")
+        res.redirect("/admin")
+      else
+        Redirect(req,res,'')
     }
   }
 });
@@ -178,7 +181,10 @@ router.post('/login',async (req,res,next)=>{
   }else {
     req.session.login=username;
     login=username;
-    Redirect(req,res,'')
+    if(username=="Admin")
+        res.redirect("/admin")
+    else
+      Redirect(req,res,'')
   }
 });
 //logout

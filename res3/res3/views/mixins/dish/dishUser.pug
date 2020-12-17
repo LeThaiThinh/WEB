@@ -10,7 +10,7 @@ mixin dishUser(dish)
                 
                 <i class="fas fa-coins"></i>
             form(action=`${dish.id}/rate`, method="post" class="rate")
-                fieldset.ratingMenu
+                fieldset.ratingMenu(style="float:none!important")
                     input(type="radio" name="rating"  id="1star") 
                     if dish.ratingAvg
                         label(for="1star" name="rating")=`${dish.ratingAvg.substring(0,3)}`

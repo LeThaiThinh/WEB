@@ -123,12 +123,23 @@ router.post('/menu/:id/edit',async function(req,res,next){
 });
 //reserve
 router.get('/reserve',async function(req,res,next){
-    const reservations=await Reservation.findAll({include:[User],
+  const users=User.findAll({
+    include:[{
+      model:Reservation,
       order:[["id","DESC"]],
       where:{
       state:"Pending"
-    }})
-    res.render('reserve/reserveAdmin', {title:'reserve', reservations:reservations})
+    }
+  }],
+    where:{
+      [Op.and]: [
+        {'username':{[Op.substring]: search.username}},
+        // {'phone':{[Op.substring]: search.phone}},
+      ] 
+    }
+  })
+  
+    res.render('reserve/reserveAdmin', {title:'reserve', users:users})
 })
 router.get('/reserve/history',async function(req,res,next){
   const reservationsDone=await Reservation.findAll({include:[User],
@@ -197,7 +208,24 @@ router.get('/reserve/:username',async function(req,res,next){
 router.get('/account',async function(req,res,next){
   try{
     const users=await User.findAll({raw:true})
-    res.render('account/accountAdmin',{title:'accountAdmin',users})
+    res.render('account/accountAdmin',{title:'accountAdmin',users:users})
+  }catch(error){
+    next(error)
+}
+})
+router.post('/account/search',async function(req,res,next){
+  const search=req.body
+  console.log(search.username)
+  try{
+    const users=User.findAll({
+      where:{
+        [Op.and]: [
+          {'username':{[Op.substring]: search.username}},
+          // {'phone':{[Op.substring]: search.phone}},
+        ] 
+      }
+    })
+    res.render('account/accountAdmin',{title:'accountAdmin',users:users,search:search})
   }catch(error){
     next(error)
 }
