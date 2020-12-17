@@ -14,23 +14,8 @@ router.get('/',function(req,res,next){
 //menu
 router.get('/menu',async function(req,res,next){
     try{
-      const dishes= await Dish.findAll({
-        include:[{
-          model:User,
-          through:{
-            attributes: [
-              "rating",
-            ],
-          },
-        }],
-        attributes: [
-          "id","nameDish","description","cost","image","available",
-          [sequelize.fn('AVG', sequelize.col('users.ratingDish.rating')), 'ratingAvg']
-        ],
-        group:["id"],
-        raw:true,
-        
-        })
+    const dishes=await Dish.findAll({raw:true});
+    // console.log(dishes)
     res.render('menu/menuAdmin',  {title: 'menuAdmin',dishes});
     }catch(error){
         next(error);
@@ -72,10 +57,10 @@ router.post('/search',async function(req,res,next){
   }
   if(req.body.costMax){
     costMax=req.body.costMax
-  }else costMax=100000
+  }
   if(req.body.costMin){
     costMin=req.body.costMin
-  }else costMin=0
+  }
   var dishes
   if(costOrder){
     dishes= await Dish.findAll({
@@ -139,12 +124,23 @@ router.post('/menu/:id/edit',async function(req,res,next){
 });
 //reserve
 router.get('/reserve',async function(req,res,next){
-    const reservations=await Reservation.findAll({include:[User],
+  const users=User.findAll({
+    include:[{
+      model:Reservation,
       order:[["id","DESC"]],
       where:{
       state:"Pending"
-    }})
-    res.render('reserve/reserveAdmin', {title:'reserve', reservations:reservations})
+    }
+  }],
+    where:{
+      [Op.and]: [
+        {'username':{[Op.substring]: search.username}},
+        // {'phone':{[Op.substring]: search.phone}},
+      ] 
+    }
+  })
+  
+    res.render('reserve/reserveAdmin', {title:'reserve', users:users})
 })
 router.get('/reserve/history',async function(req,res,next){
   const reservationsDone=await Reservation.findAll({include:[User],
@@ -213,23 +209,23 @@ router.get('/reserve/:username',async function(req,res,next){
 router.get('/account',async function(req,res,next){
   try{
     const users=await User.findAll({raw:true})
-    res.render('account/accountAdmin',{title:'accountAdmin',users})
+    res.render('account/accountAdmin',{title:'accountAdmin',users:users})
   }catch(error){
     next(error)
 }
 })
 router.post('/account/search',async function(req,res,next){
   const search=req.body
+  console.log(search.username)
   try{
-    const users=await User.findAll({
+    const users=User.findAll({
       where:{
         [Op.and]: [
-          {'username':{[Op.substring]:search.username}},
-          {'phone':{[Op.substring]: search.phone}},
+          {'username':{[Op.substring]: search.username}},
+          // {'phone':{[Op.substring]: search.phone}},
         ] 
       }
     })
-    console.log(users)
     res.render('account/accountAdmin',{title:'accountAdmin',users:users,search:search})
   }catch(error){
     next(error)

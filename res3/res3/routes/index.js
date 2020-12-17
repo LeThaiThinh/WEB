@@ -66,10 +66,10 @@ router.post('/search',async function(req,res,next){
   }
   if(req.body.costMax){
     costMax=req.body.costMax
-  }else costMax=100000
+  }
   if(req.body.costMin){
     costMin=req.body.costMin
-  }else costMin=0
+  }
   var dishes
   if(costOrder){
     dishes= await Dish.findAll({
@@ -124,7 +124,6 @@ router.post('/search',async function(req,res,next){
       }
       })
   }
-  console.log(costMin)
   res.render('menu/menu',  {title: 'menu', dishes});
 });
 router.get('/menu/:id',async function(req,res,next){
