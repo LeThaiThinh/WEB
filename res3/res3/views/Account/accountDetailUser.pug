@@ -12,21 +12,21 @@ block append content
     #wrap-all-account
       .wrap-account      
               
-            form(action=`${user.id}/username`, method="post")
+            form(action=`profile/username`, method="post")
               <i class="fas fa-user"></i>
               .form-user 
                 label(for="username") Username:
                 input(type="text", name="username" value=`${user.username}`)
                 //- button(type="submit") edit
-                button(type="submit" class="btn btn-secondary admin-btn" style="font-size:12px;margin-bottom: 5px") edit
+                //-button(type="submit" class="btn btn-secondary admin-btn" style="font-size:12px;margin-bottom: 5px") edit
 
-            form(action=`${user.id}/dateOfBirth`, method="post")
+            form(action=`profile/dateOfBirth`, method="post")
               .form-user  
                 label(for="dateOfBirth") DateOfBirth:
                 input(type="date", name="dateOfBirth" value=`${user.dateOfBirth}`)
                 button(type="submit" class="btn btn-secondary admin-btn" style="font-size: 12px;margin-bottom: 5px;") edit
 
-            form(action=`${user.id}/phone`, method="post")
+            form(action=`profile/phone`, method="post")
               .form-user
                 label(for="phone") Phone:
                 input(type="tel", name="phone" value=`${user.phone}`)

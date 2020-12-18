@@ -249,4 +249,26 @@ router.get('/:username/user/profile',async function(req, res, next) {
   const user=await User.findOne({where:{username: username}}) 
   res.render('Account/accountDetailUser', { title: 'homeUser' ,user});
 });
+router.post('/:username/user/profile/phone',async function(req,res,next){
+  try{
+    const username=req.params.username;
+    await User.update({phone:req.body.phone},
+      {where:{username:username}}
+      )
+    res.redirect(`/${username}/user/profile`);
+  }catch(error){
+       next(error)
+  }
+})
+router.post('/:username/user/profile/dateOfBirth',async function(req,res,next){
+  try{
+    const username=req.params.username;
+    await User.update({dateOfBirth:req.body.dateOfBirth},
+      {where:{username:username}}
+      )
+    res.redirect(`/${username}/user/profile`);
+  }catch(error){
+       next(error)
+  }
+})
 module.exports = router;
