@@ -202,7 +202,10 @@ router.get('/:username/user/reserve',async function(req,res,next){
           { [Op.like]:"done"},
           { [Op.like]:"cancelled"},
         ]}
-  }})
+    },
+    limit:8,
+
+})
   // res.json(reservation)
   res.render('reserve/reserveUser', {title:'reserve',pendingReservation:pendingReservation,user:user,reservations:reservations})
 })
