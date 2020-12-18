@@ -1,7 +1,12 @@
 extends ../index
 include ../mixins/reserve/reserveFormAdmin
+include ../mixins/searchAccountReserveFormHistory
 block append topbar
     +topbarAdmin
+block append sidebar-text
+    .menu-admin
+        a Search Account   
+        +searchAccountReserveFormHistory(search)
 block append content
   .wrap-content(style="min-width:750px")
     .container-xl

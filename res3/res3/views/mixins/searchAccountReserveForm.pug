@@ -1,0 +1,9 @@
+mixin searchAccountReserveForm(search={})
+    .dish-form(style="margin-bottom:50px!important")
+        form(action="/admin/reserve/search", method="post" class="dish-form-1" autocomplete)
+            .formInput
+                input(type="text", name="username" class="text-box" placeholder="username" value=search.username)
+            .formInput
+                input(type="number", name="phone"  class="text-box" placeholder="phone" value=search.phone)
+            .formInput
+                button(type="submit" class="form-button" ) Confirm

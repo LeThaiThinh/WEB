@@ -33,7 +33,7 @@ router.get('/menu',async function(req,res,next){
       "id","nameDish","description","cost","image","available",
       [sequelize.fn('AVG', sequelize.col('users.ratingDish.rating')), 'ratingAvg']
     ],
-    group:["id"],
+    group:["Id"],
     raw:true,
     
     })

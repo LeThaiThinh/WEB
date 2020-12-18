@@ -7,8 +7,8 @@ const Menu = require("./menu");
 
 User.hasMany(Reservation)
 Reservation.belongsTo(User)
-Menu.hasMany(Dish)
-Dish.belongsTo(Menu)
+// Menu.hasMany(Dish)
+// Dish.belongsTo(Menu)
 User.belongsToMany(Dish,{through:RatingDish})
 Dish.belongsToMany(User,{through:RatingDish})
 

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const Op = require('sequelize').Op;
+const sequelize=require("../model/sequelize")
 const {Dish,Reservation,User,RatingDish,Menu}=require("../model/relation")
 /*ADMIN*/
 // home
@@ -13,28 +14,29 @@ router.get('/',function(req,res,next){
 });
 //menu
 router.get('/menu',async function(req,res,next){
-    try{
-      const dishes= await Dish.findAll({
-        include:[{
-          model:User,
-          through:{
-            attributes: [
-              "rating",
-            ],
-          },
-        }],
+  try{
+    const dishes= await Dish.findAll({
+    include:[{
+      model:User,
+      through:{
         attributes: [
-          "id","nameDish","description","cost","image","available",
-          [sequelize.fn('AVG', sequelize.col('users.ratingDish.rating')), 'ratingAvg']
+          "rating",
         ],
-        group:["id"],
-        raw:true,
-        
-        })
-    res.render('menu/menuAdmin',  {title: 'menuAdmin',dishes});
-    }catch(error){
-        next(error);
-    }
+      },
+    }],
+    attributes: [
+      "id","nameDish","description","cost","image","available",
+      [sequelize.fn('AVG', sequelize.col('users.ratingDish.rating')), 'ratingAvg']
+    ],
+    group:["Id"],
+    raw:true,
+    
+    })
+    console.log(dishes)
+    res.render('menu/menuAdmin',  {title: 'menu', dishes:dishes});
+  }catch(error){
+    next(error)
+  }
 });
 router.post('/menu',async function(req,res,next){
     try{
@@ -146,8 +148,35 @@ router.get('/reserve',async function(req,res,next){
     }})
     res.render('reserve/reserveAdmin', {title:'reserve', reservations:reservations})
 })
+router.post('/reserve/search',async function(req,res,next){
+  const search=req.body
+  try{
+    const reservations=await Reservation.findAll({
+      include:[{
+      model:User,
+      where:{
+        [Op.and]: [
+          {'username':{[Op.substring]:search.username}},
+          {'phone':{[Op.substring]: search.phone}},
+          {'username':{[Op.notLike]:"Admin"}},
+        ] 
+       }
+      }],
+      order:[["id","DESC"]],
+      where:{
+      state:"Pending"
+      }
+    })
+    console.log(reservations)
+    res.render('reserve/reserveAdmin',{title:'reserveAdmin',reservations:reservations,search:search})
+  }catch(error){
+    next(error)
+  }
+})  
 router.get('/reserve/history',async function(req,res,next){
-  const reservationsDone=await Reservation.findAll({include:[User],
+  
+  const reservationsDone=await Reservation.findAll({
+    include:[User],
     order:[["id","DESC"]],
     where:{
     state:{[Op.or]:[
@@ -158,6 +187,34 @@ router.get('/reserve/history',async function(req,res,next){
   })
   res.render('reserve/reserveAdminHistory', {title:'reserve', reservationsDone:reservationsDone})
 })
+router.post('/reserve/search/history',async function(req,res,next){
+  const search=req.body
+  try{
+    const reservationsDone=await Reservation.findAll({
+      include:[{
+      model:User,
+      where:{
+        [Op.and]: [
+          {'username':{[Op.substring]:search.username}},
+          {'phone':{[Op.substring]: search.phone}},
+          {'username':{[Op.notLike]:"Admin"}},
+        ] 
+       }
+      }],
+      order:[["id","DESC"]],
+      where:{
+      state:{[Op.or]:[
+        {[Op.like]:"done"},
+        {[Op.like]:"cancelled"},
+      ]}
+      }
+    })
+    console.log(reservationsDone)
+    res.render('reserve/reserveAdminHistory',{title:'reserveAdminHistory',reservationsDone:reservationsDone,search:search})
+  }catch(error){
+    next(error)
+  }
+}) 
 router.post('/reserve/edit/:id',async function(req,res,next){
   datetime=req.body.datetime
   partySize=req.body.partySize
@@ -212,7 +269,12 @@ router.get('/reserve/:username',async function(req,res,next){
 //account
 router.get('/account',async function(req,res,next){
   try{
-    const users=await User.findAll({raw:true})
+    const users=await User.findAll({
+      raw:true,
+      where:{
+        username:{[Op.notLike]:"Admin"}
+      }
+    })
     res.render('account/accountAdmin',{title:'accountAdmin',users})
   }catch(error){
     next(error)
@@ -226,6 +288,7 @@ router.post('/account/search',async function(req,res,next){
         [Op.and]: [
           {'username':{[Op.substring]:search.username}},
           {'phone':{[Op.substring]: search.phone}},
+          {'username':{[Op.notLike]:"Admin"}},
         ] 
       }
     })

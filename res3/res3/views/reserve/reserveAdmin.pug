@@ -1,13 +1,12 @@
 extends ../index
 include ../mixins/reserve/reserveFormAdmin
+include ../mixins/searchAccountReserveForm
 block append topbar
     +topbarAdmin
 block append sidebar-text
-    .edit-text
-        p THIS IS OUR LOGIN PAGE!
-        br
-        p
-        | I&apos;m a paragraph. Click here to add your own text and edit me. It&rsquo;s easy. Just click &ldquo;Edit Text&rdquo; or double click me to add your own content and make changes to the font.    
+    .menu-admin
+        a Search Account   
+        +searchAccountReserveForm(search)
 block append content
   .wrap-content(style="min-width:850px")
     
@@ -62,7 +61,7 @@ block append content
                       button(type="submit" class="trash-btn")
                         <i class="fas fa-trash" title='Delete' data-toggle='tooltip'></i>
                     
-      a(href="reserve/history" style="float:right;margin:5px" class="topbar-text" ) History                
+      a(href="/admin/reserve/history" style="float:right;margin:5px" class="topbar-text" ) History                
                   
 
 
