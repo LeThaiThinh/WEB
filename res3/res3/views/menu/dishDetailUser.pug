@@ -4,15 +4,14 @@ block append topbar
     +topbarUser   
 block append sidebar-text
             .edit-text
-                p THIS IS OUR DISH!
+                p Yummy!
                 br
                 p
-                | I&apos;m a paragraph. Click here to add your own text and edit me. It&rsquo;s easy. Just click &ldquo;Edit Text&rdquo; or double click me to add your own content and make changes to the font.
+                | ILorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus euismod consectetur consequat. Etiam ultrices mauris diam, eget pretium enim tristique eget. Duis magna sem, vestibulum commodo bibendum ac, tincidunt a tellus. Sed euismod, nisl at pulvinar sodales, elit augue mollis ex, id dignissim sapien velit sit amet mi. Ut sit amet lorem placerat, dignissim diam non, finibus leo. Pellentesque at ullamcorper risus, a iaculis arcu. Praesent vestibulum eleifend dapibus. Donec id feugiat lectus.
                 br
                 br
                 br
-                br
-                p=dish.description
+                p=`${dish.description} . `
 block append content
     .wrap-content
         .menu(style="grid-template-columns: 100%!important;")

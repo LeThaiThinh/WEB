@@ -1,13 +1,10 @@
 mixin dishDetailAdmin(dish)
     .dish
-        .dishDetailImage
+        .dishImage
             a(href=`/admin/menu/${dish.id}`)
                 img(src=`/images/dishes/${dish.image}`, alt=`/images/dishes/${dish.image}` class="dish-img")
                 a(href=`/admin/menu/${dish.id}/edit` ) 
                     button(type="submit" class="edit-button") Edit 
                 a(href=`/admin/menu/${dish.id}/remove`  ) 
                     form(action=`/admin/menu/${dish.id}/remove`, method="post")
-                        button(type="submit" class="remove-button") Remove    
-            .explicit-dishInfo
-                h4(class="dish-name")=dish.nameDish
-                p(class="dish-cost")=`${dish.cost}`
+                        button(type="submit" class="remove-button") Remove        

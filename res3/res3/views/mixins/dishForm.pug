@@ -16,11 +16,19 @@ mixin dishForm(dish={})
                     input#chooseFile(type="file", name="image" required style="margin-bottom: 10px;" value=dish.image)
 
             .formInput
-                .availability
-                    label(for="available" ) available&ensp;
-                    input(type="radio", name="available" value="true" )
-                .availability 
-                    label(for="available" ) unavailable&ensp;
-                    input(type="radio", name="available" value="false")        
+                if dish.available
+                    .availability
+                        label(for="available" ) available&ensp;
+                        input(type="radio", name="available" value="true" checked)
+                    .availability 
+                        label(for="available" ) unavailable&ensp;
+                        input(type="radio", name="available" value="false") 
+                else
+                    .availability
+                        label(for="available" ) available&ensp;
+                        input(type="radio", name="available" value="true" )
+                    .availability 
+                        label(for="available" ) unavailable&ensp;
+                        input(type="radio", name="available" value="false" checked)          
             .formInput
                 button(type="submit" class="form-button" ) Confirm

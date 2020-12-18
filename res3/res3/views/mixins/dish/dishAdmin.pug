@@ -8,3 +8,15 @@ mixin dishAdmin(dish)
                 a(href=`/admin/menu/${dish.id}/remove`  ) 
                     form(action=`/admin/menu/${dish.id}/remove`, method="post")
                         button(type="submit" class="remove-button") Remove        
+        .dishInfo
+            a(href=`/admin/menu/${dish.id}/edit` class="dish-name")=dish.nameDish
+            br
+            a(href=`/admin/menu/${dish.id}/edit` class="dish-cost")=`${dish.cost } `
+                <i class="fas fa-coins"></i>
+            form(action=`${dish.id}/rate`, method="post" class="rate")
+                fieldset.ratingMenu(style="float:none!important")
+                    input(type="radio" name="rating"  id="1star") 
+                    if dish.ratingAvg
+                        label(for="1star" name="rating")=`${dish.ratingAvg.substring(0,3)}`
+                    else
+                        label(for="1star" name="rating")=`0`

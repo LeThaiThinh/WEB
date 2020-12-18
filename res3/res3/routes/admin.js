@@ -141,11 +141,14 @@ router.post('/menu/:id/edit',async function(req,res,next){
 });
 //reserve
 router.get('/reserve',async function(req,res,next){
-    const reservations=await Reservation.findAll({include:[User],
+    const reservations=await Reservation.findAll({
+      include:[User],
       order:[["id","DESC"]],
       where:{
       state:"Pending"
     }})
+    console.log(reservations)
+
     res.render('reserve/reserveAdmin', {title:'reserve', reservations:reservations})
 })
 router.post('/reserve/search',async function(req,res,next){
@@ -344,7 +347,10 @@ router.post('/account/:id/phone',async function(req,res,next){
 router.post('/account/:id/remove',async function(req,res,next){
   try{
     const id=req.params.id;
-    await User.destroy({where:{id:id}})
+    await User.destroy({
+      include:[{model:Reservation}],
+      where:{id:id}
+    })
     res.redirect('/admin/account');
   }catch(error){
        next(error)
