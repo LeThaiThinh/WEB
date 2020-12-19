@@ -6,7 +6,8 @@ const {Dish,Reservation,User,RatingDish,Menu}=require("../model/relation")
 const {check,validationResult}=require("express-validator")
 const {santitize, sanitize}=require("express-validator")
 function Redirect(req,res,params){
-  if(req.session.login){
+  if(req.session.login=="Admin") res.redirect(`/admin${params}`)
+  else if(req.session.login){
     res.redirect(`/${req.session.login}/user${params}`)
   }
 }
@@ -181,9 +182,9 @@ router.post('/login',async (req,res,next)=>{
     res.render('account/login', {title:'wrong password'})
   }else {
     req.session.login=username;
-    login=username;
-    if(username=="Admin")
+    if(username=="Admin"){
         res.redirect("/admin")
+    }
     else
       Redirect(req,res,'')
   }
@@ -191,6 +192,7 @@ router.post('/login',async (req,res,next)=>{
 //logout
 router.get('/logout', function(req, res, next) {
   //delete req.session.login;
+  console.log(req.session.login)
   req.session.destroy();
   res.redirect('/');
 });
