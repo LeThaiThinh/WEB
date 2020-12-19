@@ -126,7 +126,7 @@ p {
   position: relative;
   margin: 0px 0px 0 calc((100% - 1000px) * 0.5);
   width: 311px;
-  height: 200px;
+  height: 300px;
   background-color: rgba(30, 30, 30, 1);
 }
 .content {
