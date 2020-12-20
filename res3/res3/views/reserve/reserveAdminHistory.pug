@@ -35,10 +35,16 @@ block append content
               each reservationDone in reservationsDone
                 tr
                   td=reservationDone.id
-                
-                  td=reservationDone.user.username
+
+                  if(reservationDone.user)
+                    td=reservationDone.user.username
+                  else 
+                    td=`account deleted`
                   td=`${reservationDone.datetime.toString().substring(16,24)} on ${reservationDone.datetime.toString().substring(8,10)} ${reservationDone.datetime.toString().substring(3,7)} ${reservationDone.datetime.toString().substring(11,16) }`
-                  td=reservationDone.user.phone
+                  if(reservationDone.user)
+                    td=reservationDone.user.phone
+                  else 
+                    td=`account deleted`
                   td=reservationDone.partySize
                   td=reservationDone.state
                   //- td

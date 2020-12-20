@@ -201,6 +201,7 @@ router.get('/admin/reserve/history',async function(req,res,next){
     ]}
     }
   })
+  // console.log(reservationsDone)
   res.render('reserve/reserveAdminHistory', {title:'reserve', reservationsDone:reservationsDone})
 })
 router.post('/admin/reserve/search/history',async function(req,res,next){
